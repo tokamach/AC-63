@@ -1,0 +1,79 @@
+															 _____	 _____  _____  _____  ______			
+								 	                        /    /  /  __/ /_  _/ /    / / __  /
+								 	                       /___ /  / /__    / /  / ___/ / / / /
+								 	                      /    /  /__  /   / /  / / \  / /_/ /
+								 	                     /    /	  ____/   /_/  /_/ \_\/_____/ 
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+(Note: Any statement surrounded in (brackets) is considered out of character and is usally keybinds)
+
+Congratulations on the purchase of your brand new Astro Computing Inc. AC-6 Vessesl Control System!
+
+Remember to always buy from the best!
+
+This Manual will explain all about your new purchase, and its operational procedures. See the section reference for specific information. Should you  encounter any issues with your Astro Computing Inc. AC-6 Vessel Control System please see an Astro Computing Inc. Safety Representative immediately.
+
+__________
+|1.Introduction
+|--------
+|2.Interface
+|--------
+|3. -tbd-
+|-------
+|4. -tbd-
+|-------
+|5. -tbd-
+
+
+1. Introduction
+------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Astro Computing Inc. has manufactured computers since the first Apollo Guidance Computer, and has dominated the market with their Fantastic Customer  Service Policy and Exceptional Customer Safety Agreement. Now, they produce Outstanding Vessel Guidance, Control, Managment, Life Support and         Cafeteria control systems. 
+
+
+------------------------------------------------------------------------------------------------------------------------------------------------------2. Interface
+------------------------------------------------------------------------------------------------------------------------------------------------------
+
+The Astro Computing Inc. AC-6 Vessel Control System is controlled at it's heart by an Astro Computing Inc. TeleTerminal product. However, you may only
+have one of these units aboard your ship, if so then you may find yourself spending a lot of time inspecting Astro Computing Inc. CPU and RAM        Inspection and Modifification Panels, Abbreviated CRIMP. Here is a diagram of a CRIMP:
+
+
+
+				4.
+        | | |START|SINGLE|     |                                                      !                                                    | |
+        | | |     |      |     |                                                      !                                                    | |
+        | | | / \ | /_\  |     |                                                      !                                                    | |
+        | | | \|/ | \ /  |     |                                                      !3.                                                  | |
+        | | |  ^  |      |     |                                                      ! /#\   /#\   / \   / \   / \   / \   / \   /#\      | |
+        | | |STOP |STEP  |     |                                                      ! \#/   \#/   \ /   \ /   \ /   \ /   \ /   \#/      | |
+        | |                                                                           !                                                    | |
+        | |                                                                           !                                                    | |
+        | |                                                                           !                                                    | |
+        | |                            2.                                             !                                                    | |
+        | |                             /#\   /#\   / \   / \   / \   / \   / \   /#\ ! /#\   /#\   / \   / \   / \   / \   / \   / \      | |
+        | |                             \#/   \#/   \ /   \ /   \ /   \ /   \ /   \#/ ! \#/   \#/   \ /   \ /   \ /   \ /   \ /   \ /      | |
+        | |                                                                           !                                                    | |
+        | |                                                                           !                                                    | |
+        | |                                                                           !                                                    | |
+        | |                            1.                                             !                                                    | |
+        | |                             / \   / \   / \   / \   / \   / \   / \   / \ ! / \   / \   / \   / \   / \   / \   / \   / \      | |
+        | |                             \|/   \|/   \|/   \|/   \|/   \|/   \|/   \|/ ! \|/   \|/   \|/   \|/   \|/   \|/   \|/   \|/      | |
+        | |                              ^     ^     ^     ^     ^     ^     ^     ^  !  ^     ^     ^     ^     ^     ^     ^     ^       | |
+        | |                                                                           !                                                    | |
+        | |++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++| |
+        | |++++Astro Computing Inc. AC-6+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++| |
+        | |++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++| |
+        | \________________________________________________________________________________________________________________________________/ |
+        \____________________________________________________________________________________________________________________________________/
+
+
+Legend:
+1. Main Switches
+2. Address Lights
+3. Data Lights
+4. Control Switches
+
+It may seem complicated but once you learn it you won't forget it. As stated in the legend, the bottom row are address/data control switches. These 
+are your main interface with the CPU and RAM. A line seperates them, showing you the LSB (Least Signifcant Byte) on the left and the MSB (Most Signifigant Byte)  
