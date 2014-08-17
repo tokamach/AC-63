@@ -1,5 +1,5 @@
-All:
-	g++ -std=c++11 -o Astro Player.cpp Ship.cpp Renderer.cpp CPU.cpp Terminal.cpp -I. -lncurses
+All: cputest
+	#g++ -std=c++11 -o Astro Player.cpp Ship.cpp Renderer.cpp CPU.cpp Terminal.cpp -I. -lncurses
 
 cputest:
 	g++ -std=c++11 -o CpuTest CPU.cpp CPU.h Terminal.cpp Terminal.h TestRig.cpp -lncurses

@@ -5,6 +5,8 @@
 int main()
 {
 	Terminal terminal;
+	CPU cpu;
+	terminal.init(&cpu);
 
 	initscr();
     cbreak();
@@ -15,12 +17,12 @@ int main()
 	while(true)
 	{
 		terminal.update();
-		//terminal.updateFromInput();
-		//terminal.drawPanel(10, 4);
-		//refresh();
+		/*terminal.updateFromInput();
+		terminal.drawPanel(10, 4);
+		refresh();
 		
-		//if(terminal.getStartSwitch())
-		//	cpu.cycle();
+		if(terminal.getStartSwitch())
+			cpu.cycle();*/
 
 			
 	}

@@ -1,17 +1,17 @@
-#include "CPU.h"
-#include "SFML/Graphics.hpp"
+#include "CPU.h" 
+#ifndef __TERMINAL_H__
+#define __TERMINAL_H__
 
 class Terminal
 {
 	public:
 		
-	  CPU cpu;
+	  CPU *cpu;
 	  enum LightType { DATA, ADDRESS};
 
 	  //Misc functions
-	  void init();
+	  void init(CPU *cpu_);
 	  void update();
-	  void updateWithRender(sf::RenderWindow *window);
 	  void updateFromInput();
 	
 	  //Drawing functions
@@ -37,8 +37,7 @@ class Terminal
 
 	private:
 	  //Arrays to handle drawing and input
-	  //                     This bit is to stop the first bool being true
-	  bool switchArray[16] = {false};
+	  bool switchArray[16] = {false}; //This is so the first switch stays off
 	  bool addressLightArray[16]; 
 	  bool dataLightArray[8];
 	  //Switch states
@@ -47,3 +46,4 @@ class Terminal
 
 };
 
+#endif

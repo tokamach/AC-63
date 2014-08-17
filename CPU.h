@@ -1,3 +1,6 @@
+#ifndef __CPU_H__
+#define __CPU_H__
+
 using byte = unsigned char;
 
 class CPU
@@ -15,7 +18,8 @@ class CPU
   short PC;
   byte P;
 
-
  private:
   bool runCpu;
 };
+
+#endif

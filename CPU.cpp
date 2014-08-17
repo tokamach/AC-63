@@ -18,11 +18,9 @@ void CPU::initialize()
 int CPU::cycle()
 {
 
-    //terminal.setAddressLightsFromShort(PC);
     opCode = ram[PC];
       
-      /*  Big switch statement BEGINS NOW
-       */
+      //  Big switch statement BEGINS NOW 
       switch(opCode)
 	  {
 		//ADC: add memory to A with carry
@@ -36,7 +34,7 @@ int CPU::cycle()
 			break;
 
 		default:
-		//std::cout << "Op code not found";
+		std::cout << "Op code not found";
 		break;
 	  }
 		//Big switch statement ENDS NOW

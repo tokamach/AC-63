@@ -2,18 +2,10 @@
 #include "Renderer.h"
 #include <ncurses.h>
 #include <iostream>
-#include "SFML/Graphics.hpp"
 
-void Terminal::init()
+void Terminal::init(CPU *cpu_)
 {
-	cpu.initialize();
-}
-
-void Terminal::updateWithRender(sf::RenderWindow *window)
-{
-	    sf::CircleShape shape(100.f);
-		    shape.setFillColor(sf::Color::Green);
-	window->draw(shape);
+	cpu = cpu_;
 }
 
 void Terminal::update()
@@ -23,8 +15,8 @@ void Terminal::update()
 	updateFromInput();
 	if(getStartSwitch())
 	{
-		cpu.cycle();
-		setAddressLightsFromShort(cpu.PC);
+		cpu->cycle();
+		setAddressLightsFromShort(cpu->PC);
 	}
 }
 void Terminal::drawPanel(int xoff, int yoff)
@@ -309,7 +301,7 @@ void Terminal::updateFromInput()
 				break;
 			//Read switch: r
 			case 114:
-				setDataLightsFromByte(cpu.ram[getAddressFromSwitches()]);
+				setDataLightsFromByte(cpu->ram[getAddressFromSwitches()]);
 				if(getAddressFromSwitches() < 4097)
 				setAddressLightsFromShort(getAddressFromSwitches());
 				break;
@@ -317,31 +309,31 @@ void Terminal::updateFromInput()
 			//Start switch: q
 			case 113:
 				toggleStartSwitch();
-				cpu.toggleRun();
+				cpu->toggleRun();
 				break;
 
 			//Single step: e
 			case 101:
-				cpu.cycle();
-				setAddressLightsFromShort(cpu.PC);
-				setDataLightsFromByte(cpu.ram[cpu.PC]);
+				cpu->cycle();
+				setAddressLightsFromShort(cpu->PC);
+				setDataLightsFromByte(cpu->ram[cpu->PC]);
 				singleStepSwitch = true;
 				break;
 
 			//Write: w
 			case 119:
-				cpu.ram[getAddressFromLights()] = getDataFromSwitches();
+				cpu->ram[getAddressFromLights()] = getDataFromSwitches();
 				setDataLightsFromByte((unsigned char)getAddressFromLights());
 				break;
 
 			//Reset: t
 			case 116:
-				cpu.PC = 0x00;
+				cpu->PC = 0x00;
 				break;
 
 			//Jump switch address: y
 			case 121:
-				cpu.PC = getDataFromSwitches();
+				cpu->PC = getDataFromSwitches();
 		}
 }
 
@@ -363,7 +355,7 @@ short Terminal::getAddressFromLights()
 	for(int i = 0; i < 15; i++)
 	{
 		sum += addressLightArray[i];
-		if(i != 15)
+		if(i <= 15)
 			sum<<=1;
 	}
 	return sum;

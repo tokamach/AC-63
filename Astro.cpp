@@ -6,7 +6,7 @@
 
 #define STAR_GEN_CHANCE 2
 
-//This does some stuff to fill the ship with goodies like air
+//This will do some stuff to fill the ship with goodies like air
 void Astro::initShip()
 {
   ship = new Ship();
