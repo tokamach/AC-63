@@ -401,23 +401,6 @@ void Terminal::setSwitch(int set, bool state)
 		switchArray[set] = state;
 }
 
-void Terminal::setIndividualDataLight(int light, bool state)
-{
-	if(light > 7)
-		return;
-
-	else
-		dataLightArray[light] = state;
-}
-
-void Terminal::setIndividualAddressLight(int light, bool state)
-{
-	if(light > 15)
-		return;
-	else
-		addressLightArray[light] = state;
-}
-
 void Terminal::setDataLightsFromByte(unsigned char set)
 {
 	for(int i = 0; i<7; i++)
