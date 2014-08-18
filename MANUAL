@@ -2,7 +2,7 @@
 								 	                        /    /  /  __/ /_  _/ /    / / __  /
 								 	                       /___ /  / /__    / /  / ___/ / / / /
 								 	                      /    /  /__  /   / /  / / \  / /_/ /
-								 	                     /    /	  ____/   /_/  /_/ \_\/_____/ 
+								 	                     /    /	 /____/   /_/  /_/ \_\/_____/ 
 
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -26,18 +26,21 @@ __________
 |-------
 |5. -tbd-
 
-
+------------------------------------------------------------------------------------------------------------------------------------------------------
 1. Introduction
 ------------------------------------------------------------------------------------------------------------------------------------------------------
 
-Astro Computing Inc. has manufactured computers since the first Apollo Guidance Computer, and has dominated the market with their Fantastic Customer  Service Policy and Exceptional Customer Safety Agreement. Now, they produce Outstanding Vessel Guidance, Control, Managment, Life Support and         Cafeteria control systems. 
+Astro Computing Inc. has manufactured computers since the first Apollo Guidance Computer, and has dominated the market with their Fantastic Customer 
+Service Policy and Exceptional Customer Safety Agreement. Now, they produce Outstanding Vessel Guidance, Control, Managment, Life Support and 
+Cafeteria control systems. 
 
-
-------------------------------------------------------------------------------------------------------------------------------------------------------2. Interface
+------------------------------------------------------------------------------------------------------------------------------------------------------
+2. Interface
 ------------------------------------------------------------------------------------------------------------------------------------------------------
 
 The Astro Computing Inc. AC-6 Vessel Control System is controlled at it's heart by an Astro Computing Inc. TeleTerminal product. However, you may only
-have one of these units aboard your ship, if so then you may find yourself spending a lot of time inspecting Astro Computing Inc. CPU and RAM        Inspection and Modifification Panels, Abbreviated CRIMP. Here is a diagram of a CRIMP:
+have one of these units aboard your ship, if so then you may find yourself spending a lot of time inspecting Astro Computing Inc. CPU and RAM        
+Inspection and Modifification Panels, Abbreviated CRIMP. Here is a diagram of a CRIMP:
 
 
 
@@ -76,4 +79,5 @@ Legend:
 4. Control Switches
 
 It may seem complicated but once you learn it you won't forget it. As stated in the legend, the bottom row are address/data control switches. These 
-are your main interface with the CPU and RAM. A line seperates them, showing you the LSB (Least Signifcant Byte) on the left and the MSB (Most Signifigant Byte)  
+are your main interface with the CPU and RAM. A line seperates them, showing you the Most Signifcant Byte on the left and the 
+Least Signifigant Byte on the right. 

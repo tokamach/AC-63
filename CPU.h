@@ -1,12 +1,12 @@
 #ifndef __CPU_H__
 #define __CPU_H__
 
-using byte = unsigned char;
+using byte = uint8_t;
 
 class CPU
 {
  public:
-  void initialize();
+  void init();
   int cycle();
   void toggleRun();
   byte opCode;

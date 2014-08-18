@@ -1,7 +1,7 @@
 #include "CPU.h"
 #include<iostream>
 
-void CPU::initialize()
+void CPU::init()
 {
   A = 0x00;
   X = 0x00;
@@ -21,7 +21,7 @@ int CPU::cycle()
     opCode = ram[PC];
       
       //  Big switch statement BEGINS NOW 
-      switch(opCode)
+      /*switch(opCode)
 	  {
 		//ADC: add memory to A with carry
 		case 0x69:
@@ -34,9 +34,9 @@ int CPU::cycle()
 			break;
 
 		default:
-		std::cout << "Op code not found";
-		break;
-	  }
+		*/std::cout << "Opcode:" << opCode;
+		//break;
+	  //}
 		//Big switch statement ENDS NOW
      PC++; 
 }

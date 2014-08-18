@@ -1,5 +1,4 @@
 #include "Terminal.h"
-#include "Renderer.h"
 #include <ncurses.h>
 #include <iostream>
 
@@ -10,14 +9,14 @@ void Terminal::init(CPU *cpu_)
 
 void Terminal::update()
 {
+	cpu->cycle();
 	drawPanel(10, 4);
 	refresh();
 	updateFromInput();
-	if(getStartSwitch())
-	{
-		cpu->cycle();
-		setAddressLightsFromShort(cpu->PC);
-	}
+	//if(getStartSwitch())
+	//{
+		//setAddressLightsFromShort(cpu->PC);
+	//}
 }
 void Terminal::drawPanel(int xoff, int yoff)
 {
@@ -95,6 +94,8 @@ void Terminal::drawPanel(int xoff, int yoff)
 	drawToggleSwitchAt(4+xoff, 4+yoff, startSwitch);
 
 	drawFlickSwitchAt(10+xoff, 4+yoff, singleStepSwitch);
+
+	move(0, 0);
 }
 
 void Terminal::drawLightAt(int x, int y, int index, LightType type)
