@@ -1,15 +1,17 @@
-#include<Astro.h>
 #include<ncurses.h>
 #include<iostream>
 #include<stdlib.h>
 #include<fstream>
+
+#include  "Astro.h"
+#include "Player.h"
 
 #define STAR_GEN_CHANCE 2
 
 //This will do some stuff to fill the ship with goodies like air
 void Astro::initShip()
 {
-  ship = new Ship();
+  
 }
 /*
  *  The main function. Run it as while loop param, and it will return false on exit.
@@ -46,36 +48,36 @@ void Astro::fixPlayer()
 /*
  *  Gets key input and moves the player accordingly.
  */
-void Astro::getMove()
+int Astro::getMove()
 {
   int m = getch();
   switch(m)
     {
     case 27:
-      return;
+      return -1;
       break;
 
     case KEY_UP:
-      playerx--;
+      player.playerx--;
       break;
       
     case KEY_DOWN:
-      playerx++;
+      player.playerx++;
       break;
       
     case KEY_LEFT:
-      playery--;
+      player.playery--;
       break;
 
     case KEY_RIGHT:
-      playery++;
+      player.playery++;
       break;
     }
 }
 
 void Astro::drawPlayer()
 {
-    move(playerx, playery);
+    move(player.playerx, player.playery);
     addch('@');
 }
 
@@ -110,7 +112,7 @@ void Astro::startCurses()
 {
   if(cursesStarted)
   {
-    std::cout << "ncurses was started but some bozo started it agian, I'll just refresh the screen.\n";
+    std::cerr << "ncurses was started but some bozo started it agian, I'll just refresh the screen.\n";
     refresh();
   }
   else{

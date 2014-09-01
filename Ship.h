@@ -3,9 +3,9 @@
 class Ship
 {
  public:
-  Ship();
+  //initShip();
   CPU cpu;
   char structureArray[20][20];
  private:
   
-}
+};

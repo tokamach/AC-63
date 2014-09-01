@@ -13,11 +13,11 @@ void Terminal::update()
 	drawPanel(10, 4);
 	refresh();
 	updateFromInput();
-	//if(getStartSwitch())
-	//{
-		//setAddressLightsFromShort(cpu->PC);
-	//}
+	if(getStartSwitch())
+		setAddressLightsFromShort(cpu->PC);
+		
 }
+
 void Terminal::drawPanel(int xoff, int yoff)
 {
 

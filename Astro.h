@@ -1,6 +1,5 @@
 #include "Player.h"
 #include "CPU.h"
-#include "Item.h"
 #include "Ship.h"
 
 class Astro
@@ -11,6 +10,7 @@ class Astro
   void stopCurses();
   void doMove();
   void initShip();
+  int getMove();
 
  private:
   /*

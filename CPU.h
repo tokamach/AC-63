@@ -1,7 +1,10 @@
+#include <stdint.h>
+
 #ifndef __CPU_H__
 #define __CPU_H__
 
 using byte = uint8_t;
+//#define byte uint8_t
 
 class CPU
 {

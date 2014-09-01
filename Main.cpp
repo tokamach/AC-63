@@ -18,7 +18,7 @@ int main()
       if(!astro.getMove())
 		  break;
     }
-  //Stop ncurses so the terminal won't aslode
+  //Stop ncurses so the terminal won't asplode
   astro.stopCurses();
   std::cout << "Thats all folks!";
 }
