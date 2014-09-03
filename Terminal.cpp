@@ -1,6 +1,7 @@
-#include "Terminal.h"
 #include <ncurses.h>
 #include <iostream>
+
+#include "Terminal.h"
 
 void Terminal::init(CPU *cpu_)
 {
@@ -9,13 +10,15 @@ void Terminal::init(CPU *cpu_)
 
 void Terminal::update()
 {
-	cpu->cycle();
 	drawPanel(10, 4);
 	refresh();
 	updateFromInput();
-	if(getStartSwitch())
-		setAddressLightsFromShort(cpu->PC);
-		
+	if(startSwitch)
+	{
+		cpu->cycle();
+	}	
+	setAddressLightsFromShort(cpu->PC);
+	setDataLightsFromByte(cpu->ram[cpu->PC]);
 }
 
 void Terminal::drawPanel(int xoff, int yoff)
@@ -302,29 +305,24 @@ void Terminal::updateFromInput()
 				break;
 			//Read switch: r
 			case 114:
-				setDataLightsFromByte(cpu->ram[getAddressFromSwitches()]);
-				if(getAddressFromSwitches() < 4097)
-				setAddressLightsFromShort(getAddressFromSwitches());
+				cpu->PC = getAddressFromSwitches();
 				break;
 
 			//Start switch: q
 			case 113:
 				toggleStartSwitch();
-				cpu->toggleRun();
 				break;
 
 			//Single step: e
 			case 101:
 				cpu->cycle();
-				setAddressLightsFromShort(cpu->PC);
-				setDataLightsFromByte(cpu->ram[cpu->PC]);
-				singleStepSwitch = true;
+				singleStepSwitch = !singleStepSwitch;
 				break;
 
 			//Write: w
 			case 119:
-				cpu->ram[getAddressFromLights()] = getDataFromSwitches();
-				setDataLightsFromByte((unsigned char)getAddressFromLights());
+				cpu->ram[cpu->PC] = getDataFromSwitches();
+				//setDataLightsFromByte();
 				break;
 
 			//Reset: t
@@ -332,9 +330,6 @@ void Terminal::updateFromInput()
 				cpu->PC = 0x00;
 				break;
 
-			//Jump switch address: y
-			case 121:
-				cpu->PC = getDataFromSwitches();
 		}
 }
 
@@ -350,33 +345,16 @@ short Terminal::getAddressFromSwitches()
 	return sum;
 }
 
-short Terminal::getAddressFromLights()
-{
-	short sum;
-	for(int i = 0; i < 15; i++)
-	{
-		sum += addressLightArray[i];
-		if(i <= 15)
-			sum<<=1;
-	}
-	return sum;
-}
-
 unsigned char Terminal::getDataFromSwitches()
 {
 	unsigned char sum;
-	for(int i = 0; i<7; i++)
+	for(int i = 7; i > 0; i--)
 	{
 		sum += switchArray[i];
 		if(i != 7)
-		sum<<=1;
+		 sum<<=1;
 	}
 	return sum;
-}
-
-bool Terminal::getStartSwitch()
-{
-	return startSwitch;
 }
 
 void Terminal::toggleSwitch(int set)
@@ -405,11 +383,11 @@ void Terminal::setSwitch(int set, bool state)
 void Terminal::setDataLightsFromByte(unsigned char set)
 {
 	for(int i = 0; i<7; i++)
-	dataLightArray[i] = (set >> i) & 1;
+		dataLightArray[i] = (set >> i) & 1;
 }
 
 void Terminal::setAddressLightsFromShort(short set)
 {
 	for(int i = 0; i<16; i++)
-	addressLightArray[i] = (set >> i) & 1;
+		addressLightArray[i] = (set >> i) & 1;
 }

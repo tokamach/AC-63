@@ -7,18 +7,19 @@
 
 int main()
 {
-  Astro astro;
-  astro.startCurses();
-  astro.initShip();
-  while(true)
-    {
-      astro.drawAll();
+	Astro astro;
+	astro.startCurses();
+	astro.initShip();
+	while(true)
+	{
+		astro.drawAll();
 
-      //Icky science magic
-      if(!astro.getMove())
-		  break;
+		//Icky science magic
+		if(!astro.getMove())
+			std::cout << "#YOLO";
+			break;
     }
-  //Stop ncurses so the terminal won't asplode
-  astro.stopCurses();
-  std::cout << "Thats all folks!";
+	//Stop ncurses so the terminal won't asplode
+	astro.stopCurses();
+	std::cout << "Thats all folks!";
 }

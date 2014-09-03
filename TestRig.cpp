@@ -10,6 +10,7 @@ int main()
 	terminal.init(&cpu);
 
 	initscr();
+	timeout(1);
     cbreak();
     noecho();
     intrflush(stdscr, false);

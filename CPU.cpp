@@ -17,11 +17,13 @@ void CPU::init()
 
 int CPU::cycle()
 {
+	if(PC > 4095)
+		PC = 0;
 
     opCode = ram[PC];
       
       //  Big switch statement BEGINS NOW 
-      /*switch(opCode)
+      switch(opCode)
 	  {
 		//ADC: add memory to A with carry
 		case 0x69:
@@ -30,18 +32,13 @@ int CPU::cycle()
 		
 		//JMP: goto address specified
 		case 0x4c:
-			PC = ram[PC+1];
+			PC = ram[++PC];
 			break;
 
 		default:
-		*/std::cout << "Opcode:" << opCode;
-		//break;
-	  //}
+	//	std::cout << "Opcode:" << opCode;
+		break;
+	  }
 		//Big switch statement ENDS NOW
      PC++; 
-}
-
-void CPU::toggleRun()
-{
-	runCpu = !runCpu;
 }
