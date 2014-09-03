@@ -322,7 +322,6 @@ void Terminal::updateFromInput()
 			//Write: w
 			case 119:
 				cpu->ram[cpu->PC] = getDataFromSwitches();
-				//setDataLightsFromByte();
 				break;
 
 			//Reset: t

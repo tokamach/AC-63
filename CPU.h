@@ -10,12 +10,14 @@ class CPU
 	public:
 		void init();
 		int cycle();
+		void setMemory(short address, byte data);
+		byte getMemory(short address);
+
 		byte opCode;
 		byte ram[4096];
-		byte A;
 		byte X;
 		byte Y;
-		byte SP;
+		byte Z;
 		short PC;
 		byte P;
 

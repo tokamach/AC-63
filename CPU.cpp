@@ -3,16 +3,25 @@
 
 void CPU::init()
 {
-  A = 0x00;
-  X = 0x00;
-  Y = 0x00;
-  SP = 0x00;
-  PC = 0x00;
-  P = 0x00;
-  for(int i = 0; i < 4096; i++)
-    {
-      ram[i] = 0x00;
+	X = 0x00;
+	Y = 0x00;
+	Z = 0x00;
+	PC = 0x00;
+	P = 0x00;
+	for(int i = 0; i < 4096; i++)
+	{
+		ram[i] = 0x00;
     }
+}
+
+void CPU::setMemory(short address, byte data)
+{
+	
+}
+
+byte CPU::getMemory(short address)
+{
+	
 }
 
 int CPU::cycle()
@@ -23,21 +32,16 @@ int CPU::cycle()
     opCode = ram[PC];
       
       //  Big switch statement BEGINS NOW 
-      switch(opCode)
-	  {
-		//ADC: add memory to A with carry
-		case 0x69:
-		 //todo Implement ADC
-		break;
-		
+    switch(opCode)
+	{
 		//JMP: goto address specified
-		case 0x4c:
+		case 0x01:
 			PC = ram[++PC];
-			break;
+			break;	
 
 		default:
-	//	std::cout << "Opcode:" << opCode;
-		break;
+//			std::cout << "Opcode:" << opCode;
+			break;
 	  }
 		//Big switch statement ENDS NOW
      PC++; 
