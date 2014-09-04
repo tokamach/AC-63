@@ -24,7 +24,7 @@ void Terminal::update()
 
 void Terminal::drawPanel(int xoff, int yoff)
 {
-
+	attron(COLOR_PAIR(1));
 	//Draw the outer casing.
 	for(int i = 0;i < 134; i++)
 	{
@@ -33,44 +33,65 @@ void Terminal::drawPanel(int xoff, int yoff)
 		{
 			move(j+yoff - 1, i+xoff - 2);
 			if((j == 0 && i > 0 && i < 133) || (j == 28 && i > 0 && i < 133))
+			{
 				addch('_');
+			}
 
 			if((j == 1 && i == 0) || (j == 28 && i == 133))
+			{
 				addch('/');
+			}
 
 			if((i == 0 && j > 1 && j < 28) || (i == 133 && j > 1 && j < 28))
+			{
 				addch('|');
+			}
 
 			if((j == 1 && i == 133) || (j == 28 && i == 0))
+			{
 				addch('\\');
-				
+			}	
 		}
 		//Draw the Inner lines
 		for(int j = 0;j < 27; j++)
 		{
 			move(j+yoff, i+xoff);
 			if((j == 0 && i > 0 && i < 129) || (j == 26 && i > 0 && i < 129))
+			{
 				addch('_');
+			}
 
 			if((j == 1 && i == 0) || (j == 26 && i == 129))
+			{
 				addch('/');
-
+			}
 			if((i == 0 && j > 1 && j < 26) || (i == 129 && j > 1 && j < 26))
+			{
 				addch('|');
+			}
 
 			if((j == 1 && i == 129) || (j == 26 && i == 0))
+			{
 				addch('\\');
-				
+			}
+
 			if(j <= 25 && j >= 23 && i > 0 && i < 129)
+			{
 				addch('+');
+			}
 
 			if(j > 0 && j < 23 && i == 76)
+			{
 				addch('!');
+			}
 
 			if(j > 2 && j < 9 && (i == 2 || i == 8 || i == 15 || i == 21))
+			{
 				addch('|');
+			}
 		}
 	}
+	attroff(COLOR_PAIR(1));
 
 	move(24 + yoff, 5 + xoff);
 	addstr("Astro Computing Inc. AC-6");
@@ -127,6 +148,7 @@ void Terminal::drawLightAt(int x, int y, int index, LightType type)
 			move(y, x+2);
 			addch('\\');
 
+			attron(COLOR_PAIR(2));
 			if(dataLightArray[index])
 			{
 				move(y, x+1);
@@ -141,6 +163,7 @@ void Terminal::drawLightAt(int x, int y, int index, LightType type)
 				move(y+1, x+1);
 				addch(' ');
 			}
+			attroff(COLOR_PAIR(2));
 		}
 	}
 
@@ -159,7 +182,8 @@ void Terminal::drawLightAt(int x, int y, int index, LightType type)
 			addch('/');
 			move(y, x+2);
 			addch('\\');
-
+			
+			attron(COLOR_PAIR(2));
 			if(addressLightArray[index])
 			{
 				move(y, x+1);
@@ -174,6 +198,7 @@ void Terminal::drawLightAt(int x, int y, int index, LightType type)
 				move(y+1, x+1);
 				addch(' ');
 			}
+			attroff(COLOR_PAIR(2));
 		}
 	}
 }
@@ -339,19 +364,19 @@ short Terminal::getAddressFromSwitches()
 	for(int i = 15; i >= 0 ;i--)
 	{
 		sum += switchArray[i];
-		if(i <= 15)
+		if(i != 0)
 			sum <<= 1;
 	}
 	return sum;
 }
-//TODO MAKE THIS DAMN THING WORK PLS
+
 uint8_t Terminal::getDataFromSwitches()
 {
 	uint8_t sum = 0;
 	for(int i = 7; i >= 0; i--)
 	{
 		sum += switchArray[i];
-		if(i <= 7 || i > 0)
+		if(i != 0)
 			 sum <<= 1;
 	}
 	return sum;
