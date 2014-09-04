@@ -1,13 +1,13 @@
-#include "Terminal.h"
+#include "Panel.h"
 #include <ncurses.h>
 #include <iostream>
 
 int main()
 {
-	Terminal terminal;
+	Panel panel;
 	CPU cpu;
 	cpu.init();
-	terminal.init(&cpu);
+	panel.init(&cpu);
 
 	initscr();
 	timeout(1);
@@ -23,7 +23,7 @@ int main()
 
 	while(true)
 	{
-		terminal.update();
+		panel.update();
 	}
 	endwin();
 }
