@@ -3,6 +3,7 @@
 
 void CPU::init()
 {
+	//Bleep bloop
 	X = 0x00;
 	Y = 0x00;
 	Z = 0x00;
@@ -10,18 +11,33 @@ void CPU::init()
 	P = 0x00;
 	for(int i = 0; i < 4096; i++)
 	{
+		//It gets weird if you don't
 		ram[i] = 0x00;
     }
 }
 
 void CPU::setMemory(short address, byte data)
 {
-	
+	if(address > 4095)
+	{
+		//Logic for Memory mapped I/O here
+	}
+	else
+	{
+		ram[address] = data;
+	}
 }
 
 byte CPU::getMemory(short address)
 {
-	
+	if(address > 4095)
+	{
+		//Logic for MMIO here	
+	}
+	else
+	{
+		return ram[address];
+	}
 }
 
 int CPU::cycle()
@@ -31,18 +47,23 @@ int CPU::cycle()
 
     opCode = ram[PC];
       
-      //  Big switch statement BEGINS NOW 
     switch(opCode)
 	{
+		//NOP: No Operation
+		case 0x00:
+			//Do nothing
+			break;
+
 		//JMP: goto address specified
 		case 0x01:
 			PC = ram[++PC];
-			break;	
+			break;
 
+		//Don't know what to do here
 		default:
-//			std::cout << "Opcode:" << opCode;
+			//Lalalalalalala
 			break;
 	  }
-		//Big switch statement ENDS NOW
+
      PC++; 
 }

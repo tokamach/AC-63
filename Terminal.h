@@ -1,4 +1,6 @@
-#include "CPU.h" 
+#include <stdint.h>
+
+#include "CPU.h"
 #ifndef __TERMINAL_H__
 #define __TERMINAL_H__
 
@@ -26,18 +28,17 @@ class Terminal
 	  void setSwitch(int set, bool state);
 	  void setIndividualDataLight(int light, bool state);
 	  void setIndividualAddressLight(int light, bool state);
-	  void setDataLightsFromByte(unsigned char set);
+	  void setDataLightsFromByte(uint8_t set);
 	  void setAddressLightsFromShort(short set);
 
 	  //Get data functions
 	  short getAddressFromSwitches();
 	  short getAddressFromLights();
-	  unsigned char getDataFromSwitches();
-	  bool getStartSwitch();
+	  uint8_t getDataFromSwitches();
 
 	private:
 	  //Arrays to handle drawing and input
-	  bool switchArray[16] = {false}; //This is so the first switch stays off
+	  bool switchArray[16];
 	  bool addressLightArray[16]; 
 	  bool dataLightArray[8];
 	  //Switch states

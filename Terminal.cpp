@@ -1,5 +1,6 @@
 #include <ncurses.h>
-#include <iostream>
+#include  <iostream>
+#include  <stdint.h>
 
 #include "Terminal.h"
 
@@ -18,7 +19,7 @@ void Terminal::update()
 		cpu->cycle();
 	}	
 	setAddressLightsFromShort(cpu->PC);
-	setDataLightsFromByte(cpu->ram[cpu->PC]);
+	setDataLightsFromByte(cpu->getMemory(cpu->PC));
 }
 
 void Terminal::drawPanel(int xoff, int yoff)
@@ -84,15 +85,21 @@ void Terminal::drawPanel(int xoff, int yoff)
 
 	//Draw the switches
 	for(int i = 0; i <= 15; i++)
+	{
 		drawToggleSwitchAt(xoff - (i * 6) + 120, 18 + yoff, switchArray[i]);
+	}
 	
 	//Draw the data lights
 	for(int i = 0; i <= 7; i++)
+	{
 		drawLightAt(xoff - (i * 6) + 120, 7 + yoff, i, DATA);
+	}
 
 	//Draw the address lights
 	for(int i = 0; i <= 15; i++)
+	{
 		drawLightAt(xoff - (i * 6) + 120, 13 + yoff, i, ADDRESS);
+	}
 
 	drawToggleSwitchAt(4+xoff, 4+yoff, startSwitch);
 
@@ -178,19 +185,21 @@ void Terminal::drawToggleSwitchAt(int x, int y, bool state)
 		move(y+i, x + 1);
 		addch(' ');
 	}
+
 	if(state)
 	{
-	move(y, x+1);
-	addch('v');
-	move(y+1, x+1);
-	addch('|');
+		move(y, x+1);
+		addch('v');
+		move(y+1, x+1);
+		addch('|');
 	}
+
 	else
 	{
-	move(y+3, x+1);
-	addch('^');
-	move(y+2, x+1);
-	addch('|');
+		move(y+3, x+1);
+		addch('^');
+		move(y+2, x+1);
+		addch('|');
 	}
 	
 	move(y+1, x);
@@ -214,24 +223,18 @@ void Terminal::drawFlickSwitchAt(int x, int y, int state)
 	}
 	if(state==1)
 	{
-	move(y, x+1);
-	addch('v');
-	move(y+1, x+1);
-	addch('|');
-	}
-	if(state==2)
-	{
-	move(y+2, x+1);
-	addch('|');
-	move(y+3, x+1);
-	addch('^');
+		move(y, x+1);
+		addch('v');
+		move(y+1, x+1);
+		addch('|');
 	}
 	else
 	{
-	move(y+1, x+1);
-	addch('_');
+		move(y+2, x+1);
+		addch('|');
+		move(y+3, x+1);
+		addch('^');
 	}
-	
 	move(y+1, x);
 	addch('/');
 	move(y+1, x+2);
@@ -240,8 +243,6 @@ void Terminal::drawFlickSwitchAt(int x, int y, int state)
 	addch('\\');
 	move(y+2, x+2);
 	addch('/');
-	
-	
 }
 
 void Terminal::updateFromInput()
@@ -321,7 +322,7 @@ void Terminal::updateFromInput()
 
 			//Write: w
 			case 119:
-				cpu->ram[cpu->PC] = getDataFromSwitches();
+				cpu->setMemory(cpu->PC, getDataFromSwitches());
 				break;
 
 			//Reset: t
@@ -335,23 +336,23 @@ void Terminal::updateFromInput()
 short Terminal::getAddressFromSwitches()
 {
 	short sum;
-	for(int i = 15; i>0;i--)
+	for(int i = 15; i >= 0 ;i--)
 	{
 		sum += switchArray[i];
-		if(i != 15)
-		sum<<=1;
+		if(i <= 15)
+			sum <<= 1;
 	}
 	return sum;
 }
-
-unsigned char Terminal::getDataFromSwitches()
+//TODO MAKE THIS DAMN THING WORK PLS
+uint8_t Terminal::getDataFromSwitches()
 {
-	unsigned char sum;
-	for(int i = 7; i > 0; i--)
+	uint8_t sum = 0;
+	for(int i = 7; i >= 0; i--)
 	{
 		sum += switchArray[i];
-		if(i != 7)
-		 sum<<=1;
+		if(i <= 7 || i >= 0)
+			 sum <<= 1;
 	}
 	return sum;
 }
@@ -361,8 +362,7 @@ void Terminal::toggleSwitch(int set)
 	if(set>15)
 		return;
 
-	else
-		switchArray[set] = !switchArray[set];
+	switchArray[set] = !switchArray[set];
 }
 
 void Terminal::toggleStartSwitch()
@@ -375,18 +375,17 @@ void Terminal::setSwitch(int set, bool state)
 	if(set > 15)
 		return;
 
-	else
-		switchArray[set] = state;
+	switchArray[set] = state;
 }
 
-void Terminal::setDataLightsFromByte(unsigned char set)
+void Terminal::setDataLightsFromByte(uint8_t set)
 {
-	for(int i = 0; i<7; i++)
+	for(int i = 0; i <= 7; i++)
 		dataLightArray[i] = (set >> i) & 1;
 }
 
 void Terminal::setAddressLightsFromShort(short set)
 {
-	for(int i = 0; i<16; i++)
+	for(int i = 0; i <= 15; i++)
 		addressLightArray[i] = (set >> i) & 1;
 }
