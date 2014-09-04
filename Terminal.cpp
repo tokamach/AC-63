@@ -351,7 +351,7 @@ uint8_t Terminal::getDataFromSwitches()
 	for(int i = 7; i >= 0; i--)
 	{
 		sum += switchArray[i];
-		if(i <= 7 || i >= 0)
+		if(i <= 7 || i > 0)
 			 sum <<= 1;
 	}
 	return sum;
