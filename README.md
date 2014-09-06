@@ -12,8 +12,7 @@ if NASA could send a Big Pointy Space Rocket to the moon and back with 16, I thi
 As previously specified, the CPU has a 16-bit address bus width. This allows addressing any number between 0 and 65535. Data is 8-bit wide. This means 0-255. That is a small number. Make do.
 A small but functional instruction set is included, although I am adding as I go along.
 
-|------|------|-----------------|
-|Instruction|Hex|Oct|Description|
-|NOP|0x00|000|No Operation|
-|JMP|0x01|001|Jump to address|
-|---|----|---|---------------|
+|Instruction|Hex|Oct|Description     |
+|-----------|---|---|----------------|
+|NOP        |0x00|000|No Operation   |
+|JMP        |0x01|001|Jump to address|
