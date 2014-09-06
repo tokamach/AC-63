@@ -1,4 +1,5 @@
 #include "CPU.h"
+
 #include<iostream>
 
 void CPU::init()
@@ -46,6 +47,8 @@ int CPU::cycle()
 		PC = 0;
 
     opCode = ram[PC];
+
+	byte mov = 0;
       
     switch(opCode)
 	{
@@ -56,9 +59,15 @@ int CPU::cycle()
 
 		//JMP: goto address specified
 		case 0x01:
-			PC = ram[++PC];
+			PC = ram[PC+1];
 			break;
 
+		//MOV: Move A to B, no strings attatched
+		case 0x02:
+			mov = getMemory(PC + 1);
+			setMemory(PC + 2, mov);
+			break;
+			
 		//Don't know what to do here
 		default:
 			//Lalalalalalala
