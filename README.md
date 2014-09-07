@@ -14,5 +14,14 @@ A small but functional instruction set is included, although I am adding as I go
 
 |Instruction|Hex|Oct|Description     |
 |-----------|---|---|----------------|
-|NOP        |0x00|000|No Operation   |
-|JMP        |0x01|001|Jump to address|
+|NOP	     |0x00|000|No-Operation|
+|JMP A    |0x01|001|Jump to location| 
+|MOV A, B |0x02|002|Move A to B, where A and B are either addresses or values|
+|ADD A, B |0x03|003|Add A to B, see above|
+|SUB A, B |0x04|004|Subtract A from B, see above|
+|MUL A, B |0x05|005|Multiply A by B, see above|
+|DIV A, B |0x06|006|Divide A by B, see above|
+|SIN A    |0x07|007|Return the Sine of A|
+|COS A    |0x08|010|Return the Cosine of A|
+|TAN A    |0x09|011|Return the Tangent of A|
+

@@ -43,13 +43,11 @@ byte CPU::getMemory(short address)
 
 int CPU::cycle()
 {
-	if(PC > 4095)
-		PC = 0;
-
-    opCode = ram[PC];
+    opCode = getMemory(PC);
 
 	byte mov = 0;
-      
+	byte ret = 0;
+
     switch(opCode)
 	{
 		//NOP: No Operation
@@ -66,6 +64,21 @@ int CPU::cycle()
 		case 0x02:
 			mov = getMemory(PC + 1);
 			setMemory(PC + 2, mov);
+			PC += 3;
+			break;
+
+		case 0x03:
+			if((getMemory(PC + 1) + getMemory(PC + 2)) > 255)
+			{
+				P = 1;
+				ret = 255;
+				Z = ret;
+				break;
+			}
+			ret += getMemory(PC + 1);
+			ret += getMemory(PC + 2);
+			Z = ret;
+			PC += 3;
 			break;
 			
 		//Don't know what to do here
