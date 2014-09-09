@@ -3,6 +3,6 @@
 Ship::ship()
 {
   ifstream file;
-  file.open("blueprint.txt");
+  file.open("ref/blueprint.txt");
   file.get();
 }

@@ -11,7 +11,6 @@ void Panel::init(CPU *cpu_)
 
 void Panel::update()
 {
-	drawPanel(10, 4);
 	refresh();
 	updateFromInput();
 	if(startSwitch)
@@ -93,8 +92,10 @@ void Panel::drawPanel(int xoff, int yoff)
 	}
 	attroff(COLOR_PAIR(1));
 
+	attron(COLOR_PAIR(3));
 	move(24 + yoff, 5 + xoff);
 	addstr("Astro Computing Inc. AC-6");
+	attroff(COLOR_PAIR(3));
 	move(3 + yoff, 3 + xoff);
 	addstr("START");
 	move(8 + yoff, 3 + xoff);

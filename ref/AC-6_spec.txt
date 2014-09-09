@@ -1,0 +1,39 @@
+Astro Computing Inc. AC-6 Vessel Control System Spec
+
+Copyright 1971 Astro Computing Inc.
+
+==========
+|  CPU   |
+==========
+
+/--------\
+|Abstract|
+\--------/
+
+The CPU of the AC-6 has an 8-bit wordlength CPU, with a small yet functional Op-Code set.
+The address bus is 16-bit and, the data bus is 8-bits wide. Memory-mapped IO allows easy
+Input/Output to be performed with as few instructions as possible, keeping the AC-6
+simple and safe.
+ 
+/--------\
+|Op-Codes|
+\--------/
+
+-------------------------------
+Operation|Hex |Oct|Description
+-------------------------------
+NOP	     |0x00|000|No-Operation
+JMP A    |0x01|001|Jump to location 
+MOV A, B |0x02|002|Move A to B, where A and B are either addresses or values
+ADD A, B |0x03|003|Add A to B, see above
+SUB A, B |0x04|004|Subtract A from B, see above
+MUL A, B |0x05|005|Multiply A by B, see above
+DIV A, B |0x06|006|Divide A by B, see above
+SIN A    |0x07|007|Return the Sine of A
+COS A    |0x08|010|Return the Cosine of A
+TAN A    |0x09|011|Return the Tangent of A
+JSR A    |0x0A|012|Jump to subroutine A
+RTS      |0x0B|013|Return from subroutine
+BNE A    |0x0C|014|Jump to A if P = 0
+BEQ A    |0x0D|015|Jump to A if P = 1
+

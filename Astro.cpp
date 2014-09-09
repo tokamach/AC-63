@@ -13,6 +13,7 @@ void Astro::initShip()
 {
   
 }
+
 /*
  *  The main function. Run it as while loop param, and it will return false on exit.
  */
@@ -55,23 +56,23 @@ int Astro::getMove()
 	{
 		case 27:
 			return -1;
-		break;
+			break;
 
 		case KEY_UP:
-			player.playerx--;
-		break;
+			player.moveUp();
+			break;
       
 		case KEY_DOWN:
-			player.playerx++;
-		break;
+			player.moveDown();
+			break;
       
 		case KEY_LEFT:
-			player.playery--;
-		break;
+			player.moveLeft();
+			break;
 
 		case KEY_RIGHT:
-			player.playery++;
-		break;
+			player.moveRight();
+			break;
     }
 }
 
@@ -83,18 +84,26 @@ void Astro::drawPlayer()
 
 void Astro::drawStructure(int width, int height)
 {
-	int hwidth = width/2;
-	int hheight = height/2;
+	for(int i = 0; i < 20; i++)
+	{
+		for(int j = 0; j < 30; j++)
+		{
+			move(i, j);
+			addch('|');
+		}
+	}
 }
 
+//Oh my god, its full of stars
 void Astro::drawStars(int width, int height)
 { 
 	int i = 0;
 	for(int x = 0; x < width; x++)
 	{
-		for(int y = 0;y < height;y++)
+		for(int y = 0;y < height; y++)
 		{
 			move(x, y);
+			//LOL SO RANDOM LOL
 			if(rand() % 100 < STAR_GEN_CHANCE)
 			{
 				addch('*');
@@ -108,6 +117,7 @@ void Astro::drawStars(int width, int height)
 	}
 }
 
+//Start ncurses
 void Astro::startCurses()
 {
 	if(cursesStarted)
@@ -127,6 +137,7 @@ void Astro::startCurses()
 	}
 }
 
+//Stop ncurses
 void Astro::stopCurses()
 {
   if(cursesStarted && !isendwin())

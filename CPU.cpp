@@ -57,27 +57,28 @@ int CPU::cycle()
 
 		//JMP: goto address specified
 		case 0x01:
-			PC = ram[PC+1];
+			PC = getMemory(PC+1) - 1;
 			break;
 
-		//MOV: Move A to B, no strings attatched
+		//MOV: Move A to B, no questions asked
 		case 0x02:
 			mov = getMemory(PC + 1);
 			setMemory(PC + 2, mov);
 			PC += 3;
 			break;
 
+		//ADD: Add A to B
 		case 0x03:
 			if((getMemory(PC + 1) + getMemory(PC + 2)) > 255)
 			{
 				P = 1;
 				ret = 255;
-				Z = ret;
+				setMemory(PC + 1, ret);
 				break;
 			}
 			ret += getMemory(PC + 1);
 			ret += getMemory(PC + 2);
-			Z = ret;
+			setMemory(PC + 1, ret);
 			PC += 3;
 			break;
 			
