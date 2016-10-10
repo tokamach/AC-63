@@ -43,7 +43,7 @@ byte CPU::getMemory(short address)
 	}
 }
 
-int CPU::cycle()
+void CPU::cycle()
 {
     opCode = getMemory(PC);
 
