@@ -1,9 +1,9 @@
 #include "Player.h"
 
-void Player::addToInventory(Item item)
-{
-  inventory[heldItems] = item;
-}
+//void Player::addToInventory(Item item)
+//{
+//  inventory[heldItems] = item;
+//}
 
 void Player::moveUp()
 {

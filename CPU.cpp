@@ -34,6 +34,8 @@ byte CPU::getMemory(short address)
 	if(address > 4095)
 	{
 		//Logic for MMIO here	
+
+        return 0x00; // dummy logic best logic
 	}
 	else
 	{
