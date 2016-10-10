@@ -1,9 +1,9 @@
 ```
     _____	_____  _____  _____  ______			
-   /    /  /  __/ /_  _/ /    / / __  /
-  /___ /  / /__    / /  / ___/ / / / /
- /    /  /__  /   / /  / / \  / /_/ /
-/    /	/____/   /_/  /_/ \_\/_____/ 
+   //--//  /  __/ /_  _/ /    / / __  /
+  //__//  / /__    / /  / ___/ / / / /
+ //  //  /__  /   / /  / / \  / /_/ /
+//  //	/____/   /_/  /_/ \_\/_____/ 
 
 ```
 
@@ -27,31 +27,32 @@ meaning a whole 65536 individual addresses are accessible! The Data bus is a swi
 wide, ideal for mission critical calculations to be made without delay.
 
 ###Registers
-Register|Purpose     |Bits
---------|------------|----
-ACC     |Accumumlator|16
-X, Y, Z |General     |8
-FLG     |Flags       |7
+Register|Purpose        |Bits|Description
+--------|---------------|----|----------
+ACC     |Accumumlator   |16  |Stores results of operations.
+PC      |Program Counter|16  |Current location in memory of CPU.
+SP      |Stack Pointer  |16  |Allows function calls by storing address of the top of the stack
+X, Y, Z |General        |8   |General purpose registers, useful for anything!
+FLG     |Flags          |7   |Stores flags, for extending operations.
 
+
+####Flag Regiser Composition
 
 ###Operation Codes
 
 Operation|Hex |Oct|Description
 ---------|----|---|------------
 NOP	     |0x00|000|No-Operation
-JMP A    |0x01|001|Jump to location 
-MOV A, B |0x02|002|Move A to B, where A and B are either addresses or values
-ADD A, B |0x03|003|Add A to B, see above
-SUB A, B |0x04|004|Subtract A from B, see above
-MUL A, B |0x05|005|Multiply A by B, see above
-DIV A, B |0x06|006|Divide A by B, see above
-SIN A    |0x07|007|Return the Sine of A
-COS A    |0x08|010|Return the Cosine of A
-TAN A    |0x09|011|Return the Tangent of A
-JSR A    |0x0A|012|Jump to subroutine A
-RTS      |0x0B|013|Return from subroutine
-BNE A    |0x0C|014|Jump to A if P = 0
-BEQ A    |0x0D|015|Jump to A if P = 1
+JMP A    |0x01|001|Unconditionally jump to location 
+LDA A    |0x02|002|Load address into ACC
+ADD A    |0x03|003|Add A to ACC
+SUB A    |0x04|004|Subtract A from ACC
+MUL A    |0x05|005|Multiply ACC by A
+         |0x06|006|
+JSR A    |0x07|007|Jump to subroutine A
+RTS      |0x08|010|Return from subroutine to address 
+BNE A    |0x09|011|Jump to A if P = 0
+BEQ A    |0x0A|012|Jump to A if P = 1
 
 
 ##Interface
