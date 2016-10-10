@@ -9,7 +9,7 @@ class CPU
 {
 	public:
 		void init();
-		int cycle();
+		void cycle();
 		void setMemory(short address, byte data);
 		byte getMemory(short address);
 
