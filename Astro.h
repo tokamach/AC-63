@@ -1,6 +1,5 @@
 #include "Player.h"
-#include    "CPU.h"
-#include   "Ship.h"
+#include "CPU.h"
 
 class Astro
 {
@@ -17,7 +16,7 @@ class Astro
 	* Classes
 	*/
 		Player player;
-		Ship ship;
+//		Ship ship;
 	/*
 	* Functions
 	*/
