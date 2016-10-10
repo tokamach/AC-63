@@ -1,8 +1,8 @@
 All: cputest
 
 cputest:
-	g++ -g -std=c++11 -o PanelTest CPU.cpp CPU.h Panel.cpp Panel.h TestRig.cpp -lncurses -I.
+	clang --std=c++11 CPU.cpp Panel.cpp TestRig.cpp -lncurses -I. -o PanelTest
 
 game: 
-	g++ -g -std=c++11 -o Astro Main.cpp Astro.cpp CPU.cpp Panel.cpp -lncurses -I.
+	clang --std=c++11 -o Astro Main.cpp Astro.cpp CPU.cpp Panel.cpp -lncurses -I.
 
