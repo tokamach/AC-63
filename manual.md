@@ -38,9 +38,9 @@ FLG     |Flags          |7   |Stores flags, for extending operations.
 
 ####Flag Regiser Composition
 
-|0|00|0000|
-|-|--|----|
-|Indirect Address Flag|X, Y, Z load flag|some BS|
+0|00|0000
+-|--|----
+Indirect Address Flag|X, Y, Z load flag|some BS|
 
 ###Operation Codes
 
