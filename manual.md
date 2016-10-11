@@ -37,10 +37,29 @@ FLG     |Flags          |7   |Stores flags, for extending operations.
 
 
 ####Flag Regiser Composition
+The flag register is layed out as separate binary sections which alter the function of the CPU.
 
-0|00|0000
--|--|----
-Indirect Address Flag|X, Y, Z load flag|some BS|
+#####Indirect Address Flag
+The first bit of the flag register controls how addressing works.
+
+|0|operate directly on A|
+|1|use address pointed to by A|
+
+#####16-bit num mode
+The second bit controls whether memory is accessed in 8 or 16 bit mode.
+
+|0|use regular 8 bit|
+|1|compound PC+1 and PC+2 into a 16-bit number|
+
+#####Register select flags
+The 3rd and 4th bits are the register select flags. They choose which register the LDA, ADD and SUB
+intructions operate on.
+
+|00|ACC|
+|01|X  |
+|10|Y  |
+|11|Z  |
+
 
 ###Operation Codes
 
