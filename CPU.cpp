@@ -5,11 +5,11 @@
 void CPU::init()
 {
 	//Bleep bloop
-	X = 0x00;
-	Y = 0x00;
-	Z = 0x00;
-	PC = 0x00;
-	P = 0x00;
+	ACC = 0x00;
+	X   = 0x00;
+	Y   = 0x00;
+	Z   = 0x00;
+	PC  = 0x00;
 	for(int i = 0; i < 4096; i++)
 	{
 		//It gets weird if you don't
@@ -55,18 +55,18 @@ void CPU::cycle()
 		//NOP: No Operation
 		case 0x00:
 			//Do nothing
+            PC += 2;
 			break;
 
 		//JMP: goto address specified
 		case 0x01:
-			PC = getMemory(PC+1) - 1;
+			PC = getMemory(PC+1);
 			break;
 
-		//MOV: Move A to B, no questions asked
+		//LDA: load A into ACC
 		case 0x02:
-			mov = getMemory(PC + 1);
-			setMemory(PC + 2, mov);
-			PC += 3;
+			ACC = getMemory(PC + 1);
+			PC += 2;
 			break;
 
 		//ADD: Add A to B
@@ -90,5 +90,5 @@ void CPU::cycle()
 			break;
 	  }
 
-     PC++; 
+//     PC++; 
 }
