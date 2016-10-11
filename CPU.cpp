@@ -47,7 +47,6 @@ void CPU::cycle()
 {
     opCode = getMemory(PC);
 
-	byte mov = 0;
 	byte ret = 0;
 
     switch(opCode)
@@ -69,20 +68,17 @@ void CPU::cycle()
 			PC += 2;
 			break;
 
-		//ADD: Add A to B
+		//ADD: Add A to ACC
 		case 0x03:
-			if((getMemory(PC + 1) + getMemory(PC + 2)) > 255)
-			{
-				P = 1;
-				ret = 255;
-				setMemory(PC + 1, ret);
-				break;
-			}
-			ret += getMemory(PC + 1);
-			ret += getMemory(PC + 2);
-			setMemory(PC + 1, ret);
-			PC += 3;
+            ACC += getMemory(PC + 1);
+            PC += 2:
 			break;
+
+        //SUB: 
+        case 0x04:
+            ACC -= getMemory(PC + 1);
+            PC += 2;
+            break;
 			
 		//Don't know what to do here
 		default:
