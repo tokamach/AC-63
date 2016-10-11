@@ -15,11 +15,13 @@ class CPU
 
 		byte opCode;
 		byte ram[4096];
+		short ACC;
 		byte X;
 		byte Y;
 		byte Z;
 		short PC;
-		byte P;
+        short SP;
+        byte FLG;
 
 	 private:
 		bool runCpu;

@@ -10,6 +10,8 @@ void CPU::init()
 	Y   = 0x00;
 	Z   = 0x00;
 	PC  = 0x00;
+    SP  = 0xf0;
+    FLG = 0x00;
 	for(int i = 0; i < 4096; i++)
 	{
 		//It gets weird if you don't
@@ -47,7 +49,7 @@ void CPU::cycle()
 {
     opCode = getMemory(PC);
 
-	byte ret = 0;
+	byte regSel = 0;
 
     switch(opCode)
 	{
@@ -64,6 +66,9 @@ void CPU::cycle()
 
 		//LDA: load A into ACC
 		case 0x02:
+            regSel = (0b00110000 || FLG) >> 4;
+            printf("%i", regSel);
+
 			ACC = getMemory(PC + 1);
 			PC += 2;
 			break;
@@ -71,7 +76,7 @@ void CPU::cycle()
 		//ADD: Add A to ACC
 		case 0x03:
             ACC += getMemory(PC + 1);
-            PC += 2:
+            PC += 2;
 			break;
 
         //SUB: 
@@ -79,6 +84,9 @@ void CPU::cycle()
             ACC -= getMemory(PC + 1);
             PC += 2;
             break;
+
+        //JSR: 
+        
 			
 		//Don't know what to do here
 		default:

@@ -43,15 +43,18 @@ The flag register is layed out as separate binary sections which alter the funct
 The first bit of the flag register controls how addressing works.
 
 ```
-|0|operate directly on A|
+|0|operate directly on A      |
 |1|use address pointed to by A|
 ```
 
 #####16-bit num mode
-The second bit controls whether memory is accessed in 8 or 16 bit mode.
+The second bit controls whether memory is accessed in 8 or 16 bit mode. In 8 bit mode the CPU will simply
+read A from PC+1, and increment the PC by 2. In 16 bit mode, the CPU will concatenate PC+1 and PC+2 into
+a single 16 bit number, with PC+1 forming the Least Significant Half, and PC+2 forming the Most Significant
+Half. The PC is then incremented by 3.
 
 ```
-|0|use regular 8 bit|
+|0|use regular 8 bit                          |
 |1|compound PC+1 and PC+2 into a 16-bit number|
 ```
 
@@ -70,7 +73,7 @@ intructions operate on.
 
 Operation|Hex |Oct|Description
 ---------|----|---|------------
-NOP	     |0x00|000|No-Operation
+NOP      |0x00|000|No-Operation
 JMP A    |0x01|001|Unconditionally jump to location 
 LDA A    |0x02|002|Load address into ACC
 ADD A    |0x03|003|Add A to ACC
