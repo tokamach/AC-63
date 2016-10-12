@@ -5,13 +5,13 @@
 void CPU::init()
 {
 	//Bleep bloop
-	ACC = 0x00;
-	X   = 0x00;
-	Y   = 0x00;
-	Z   = 0x00;
-	PC  = 0x00;
-    SP  = 0xf0;
-    FLG = 0x00;
+	ACC = 0x000;
+	X   = 0x000;
+	Y   = 0x000;
+	Z   = 0x000;
+	PC  = 0x000;
+    SP  = 0xf00;
+    FLG = 0x000;
 	for(int i = 0; i < 4096; i++)
 	{
 		//It gets weird if you don't
