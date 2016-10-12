@@ -51,12 +51,13 @@ void CPU::cycle()
 
 	byte regSel = 0;
 
+
     switch(opCode)
 	{
 		//NOP: No Operation
 		case 0x00:
 			//Do nothing
-            PC += 2;
+            PC += 1;
 			break;
 
 		//JMP: goto address specified
@@ -95,4 +96,9 @@ void CPU::cycle()
 	  }
 
 //     PC++; 
+    if(PC > 4095)
+    {
+        PC = 0x00;
+        printf("fixed PC");
+    }
 }

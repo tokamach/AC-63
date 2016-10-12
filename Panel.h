@@ -28,19 +28,19 @@ class Panel
 	  void setSwitch(int set, bool state);
 	  void setIndividualDataLight(int light, bool state);
 	  void setIndividualAddressLight(int light, bool state);
-	  void setDataLightsFromByte(uint8_t set);
+	  void setDataLightsFromWord(short set);
 	  void setAddressLightsFromShort(short set);
 
 	  //Get data functions
 	  short getAddressFromSwitches();
 	  short getAddressFromLights();
-	  uint8_t getDataFromSwitches();
+	  short getDataFromSwitches();
 
 	private:
 	  //Arrays to handle drawing and input
-	  bool switchArray[16];
-	  bool addressLightArray[16]; 
-	  bool dataLightArray[8];
+	  bool switchArray[12];
+	  bool addressLightArray[12]; 
+	  bool dataLightArray[12];
 	  //Switch states
 	  bool startSwitch = false;
 	  int singleStepSwitch = 0;
