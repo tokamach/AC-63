@@ -12,7 +12,7 @@ void CPU::init()
 	PC  = 0x000;
     SP  = 0xf00;
     FLG = 0x000;
-	for(int i = 0; i < 4096; i++)
+	for(int i = 0; i < 4095; i++)
 	{
 		//It gets weird if you don't
 		ram[i] = 0x00;
