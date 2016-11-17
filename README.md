@@ -4,3 +4,5 @@ Astro is a game about running a spaceship, powered by a small and weak CPU. Debu
 programs on your CRT Terminal. Store spaceship control programs on Punch Cards and fly the ship with said programs. 
 
 See [manual.md](manual.md) for an AC-6 manual
+
+![image](demo.png)
