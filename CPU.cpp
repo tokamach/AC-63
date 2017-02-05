@@ -5,14 +5,14 @@
 void CPU::init()
 {
 	//Bleep bloop
-	ACC = 0x00;
-	X   = 0x00;
-	Y   = 0x00;
-	Z   = 0x00;
-	PC  = 0x00;
-    SP  = 0xf0;
-    FLG = 0x00;
-	for(int i = 0; i < 4096; i++)
+	ACC = 0x000;
+	X   = 0x000;
+	Y   = 0x000;
+	Z   = 0x000;
+	PC  = 0x000;
+    SP  = 0xf00;
+    FLG = 0x000;
+	for(int i = 0; i < 4095; i++)
 	{
 		//It gets weird if you don't
 		ram[i] = 0x00;
@@ -51,12 +51,13 @@ void CPU::cycle()
 
 	byte regSel = 0;
 
+
     switch(opCode)
 	{
 		//NOP: No Operation
 		case 0x00:
 			//Do nothing
-            PC += 2;
+            PC += 1;
 			break;
 
 		//JMP: goto address specified
@@ -95,4 +96,9 @@ void CPU::cycle()
 	  }
 
 //     PC++; 
+    if(PC > 4095)
+    {
+        PC = 0x00;
+        printf("fixed PC");
+    }
 }

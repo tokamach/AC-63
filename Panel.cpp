@@ -18,7 +18,7 @@ void Panel::update()
 		cpu->cycle();
 	}	
 	setAddressLightsFromShort(cpu->PC);
-	setDataLightsFromByte(cpu->getMemory(cpu->PC));
+	setDataLightsFromWord(cpu->getMemory(cpu->PC));
 }
 
 void Panel::drawPanel(int xoff, int yoff)
@@ -106,19 +106,19 @@ void Panel::drawPanel(int xoff, int yoff)
 	addstr("STEP");
 
 	//Draw the switches
-	for(int i = 0; i <= 15; i++)
+	for(int i = 0; i <= 11; i++)
 	{
 		drawToggleSwitchAt(xoff - (i * 6) + 120, 18 + yoff, switchArray[i]);
 	}
 	
 	//Draw the data lights
-	for(int i = 0; i <= 7; i++)
+	for(int i = 0; i <= 11; i++)
 	{
 		drawLightAt(xoff - (i * 6) + 120, 7 + yoff, i, DATA);
 	}
 
 	//Draw the address lights
-	for(int i = 0; i <= 15; i++)
+	for(int i = 0; i <= 11; i++)
 	{
 		drawLightAt(xoff - (i * 6) + 120, 13 + yoff, i, ADDRESS);
 	}
@@ -362,7 +362,7 @@ void Panel::updateFromInput()
 short Panel::getAddressFromSwitches()
 {
 	short sum;
-	for(int i = 15; i >= 0 ;i--)
+	for(int i = 11; i >= 0 ;i--)
 	{
 		sum += switchArray[i];
 		if(i != 0)
@@ -371,10 +371,10 @@ short Panel::getAddressFromSwitches()
 	return sum;
 }
 
-uint8_t Panel::getDataFromSwitches()
+short Panel::getDataFromSwitches()
 {
-	uint8_t sum = 0;
-	for(int i = 7; i >= 0; i--)
+	short sum = 0;
+	for(int i = 11; i >= 0; i--)
 	{
 		sum += switchArray[i];
 		if(i != 0)
@@ -385,7 +385,7 @@ uint8_t Panel::getDataFromSwitches()
 
 void Panel::toggleSwitch(int set)
 {
-	if(set>15)
+	if(set>11)
 		return;
 
 	switchArray[set] = !switchArray[set];
@@ -398,20 +398,20 @@ void Panel::toggleStartSwitch()
 
 void Panel::setSwitch(int set, bool state)
 {
-	if(set > 15)
+	if(set > 12)
 		return;
 
 	switchArray[set] = state;
 }
 
-void Panel::setDataLightsFromByte(uint8_t set)
+void Panel::setDataLightsFromWord(short set)
 {
-	for(int i = 0; i <= 7; i++)
+	for(int i = 0; i <= 11; i++)
 		dataLightArray[i] = (set >> i) & 1;
 }
 
 void Panel::setAddressLightsFromShort(short set)
 {
-	for(int i = 0; i <= 15; i++)
+	for(int i = 0; i <= 11; i++)
 		addressLightArray[i] = (set >> i) & 1;
 }

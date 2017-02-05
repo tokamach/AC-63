@@ -22,17 +22,17 @@ Safety Agreement. Now, they produce Outstanding Vessel Guidance, Control, Managm
 Cafeteria control systems. 
 
 ##CPU
-The AC-6 CPU is the heart and soul of your spaceship control system. It features a 16-bit address bus,
-meaning a whole 65536 individual addresses are accessible! The Data bus is a swift and clean 8-bits
-wide, ideal for mission critical calculations to be made without delay.
+The AC-6 CPU is the heart and soul of your spaceship control system. It is a 12-bit wordlength
+computer. The largest representable number in 12 bits is 4095, 
 
 ###Registers
 Register|Purpose        |Bits|Description
 --------|---------------|----|----------
-ACC     |Accumumlator   |16  |Stores results of operations.
-PC      |Program Counter|16  |Current location in memory of CPU.
-SP      |Stack Pointer  |16  |Allows function calls by storing address of the top of the stack
+ACC     |Accumumlator   |12  |Stores results of operations.
+PC      |Program Counter|12  |Current location in memory of CPU.
+SP      |Stack Pointer  |12  |Allows function calls by storing address of the top of the stack
 X, Y, Z |General        |8   |General purpose registers, useful for anything!
+I, J    |Big Register   |12  |Large 12 bit general purpose registers.
 FLG     |Flags          |7   |Stores flags, for extending operations.
 
 
@@ -45,17 +45,6 @@ The first bit of the flag register controls how addressing works.
 ```
 |0|operate directly on A      |
 |1|use address pointed to by A|
-```
-
-#####16-bit num mode
-The second bit controls whether memory is accessed in 8 or 16 bit mode. In 8 bit mode the CPU will simply
-read A from PC+1, and increment the PC by 2. In 16 bit mode, the CPU will concatenate PC+1 and PC+2 into
-a single 16 bit number, with PC+1 forming the Least Significant Half, and PC+2 forming the Most Significant
-Half. The PC is then incremented by 3.
-
-```
-|0|use regular 8 bit                          |
-|1|compound PC+1 and PC+2 into a 16-bit number|
 ```
 
 #####Register select flags
