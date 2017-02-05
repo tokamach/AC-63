@@ -1,8 +1,17 @@
 #Astro (I need a new name)
 
-Astro is a game about running a spaceship, powered by a small and weak CPU. Debug and repair programs by toggling in and reading opcodes and data values from the front panel, and write cool
-programs on your CRT Terminal. Store spaceship control programs on Punch Cards and fly the ship with said programs. 
+Astro should be a game about running a spaceship, powered by a small 
+and weak CPU. I'm going for 0x10c but a couple decades back.
 
-See [manual.md](manual.md) for an AC-6 manual
+As of right now this repo is mostly for the AC-6 emulator I'm working
+on, as well as the spec and guide in [manual.md](manual.md). The
+CPU was originally 8-bit, although I'm just finishing up with making
+it 12.
+
+Goals include:
+
+* Create and Debug programs using the CRIMP to toggle them in.
+* Attach perpipherals like storage, printers, terminals, and more.
+* Store spaceship control programs on Punch Cards/Tape Reels.
 
 ![image](demo.png)

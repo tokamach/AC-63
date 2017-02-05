@@ -32,6 +32,7 @@ ACC     |Accumumlator   |12  |Stores results of operations.
 PC      |Program Counter|12  |Current location in memory of CPU.
 SP      |Stack Pointer  |12  |Allows function calls by storing address of the top of the stack
 X, Y, Z |General        |8   |General purpose registers, useful for anything!
+I, J    |Big Register   |12  |Large 12 bit general purpose registers.
 FLG     |Flags          |7   |Stores flags, for extending operations.
 
 
