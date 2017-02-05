@@ -34,37 +34,51 @@ Register|Purpose        |Bits|Description
 ACC     |Accumumlator   |12  |Stores results of operations.
 PC      |Program Counter|12  |Current location in memory of CPU.
 SP      |Stack Pointer  |12  |Allows function calls by storing address of the top of the stack
-X, Y, Z |General        |8   |General purpose registers, useful for anything!
+X, Y, Z |General        |8   |General purpose registers.
 FLG     |Flags          |7   |Stores flags, for extending operations.
 
 ###Word Layout
 The 12-bit word of the AC-6 is structured to allow more complex instructions to be performed.
 
 ```
-AOOOXXXXXXXX
+OOOIZXXXXXXX
 ```
 
-**A**
-The first two bits are the *Addressing Mode* bits. They specify which of the 4 addressing
-modes are used for this operation.
+**O**
+The 1st three bits of the address are the 3-bit opcode.
 
-1. Value: use the 8-bit 
+**I**
+The 4th bit is the *Addressing Mode* bit. It specifies which addressing mode is
+used for this operation.
+
+0. Direct: Use the 7-bits directly
+1. Indirect: Use the 7-bits to construct a 12-bit address, which contains the operand
+
+**Z**
+The 5th bit is the *Zero* bit. It specifies how the additional 5 bits needed
+to make a 12 bit word are treated.
+
+0. Filled with zeros.
+1. Uses the 5 high order bits of the PC.
+
+**X**
+The remaining 7 bits are the operand. As per the previous flags these will
+be used either directly, or to redirect
 
 ###Operation Codes
+There are 7 basic instructions, 
 
-Operation|Hex |Oct|Description
----------|----|---|------------
-NOP      |0x00|000|No-Operation
-JMP A    |0x01|001|Unconditionally jump to location 
-LDA A    |0x02|002|Load address into ACC
-ADD A    |0x03|003|Add A to ACC
-SUB A    |0x04|004|Subtract A from ACC
-         |0x05|005|
-         |0x06|006|
-JSR A    |0x07|007|Jump to subroutine A
-RTS      |0x08|010|Return from subroutine to address 
-BNE A    |0x09|011|Jump to A if P = 0
-BEQ A    |0x0A|012|Jump to A if P = 1
+Operation|Dec|Bin|Description
+---------|---|---|------------
+AND X    |000|000|Bitwise And X with ACC
+JMP X    |001|001|Unconditionally jump to location 
+DPA X    |002|010|Deposit and clear accumulator in X
+ADD X    |003|011|Add X to ACC
+SUB X    |004|100|Subtract A from ACC
+JSR X    |005|101|Jump to subroutine A
+RTS      |006|110|Return from subroutine to address
+BNE X    |007|111|Jump to A if P = 0
+BEQ X    |008|010|Jump to A if P = 1
 
 
 ##Interface
