@@ -1,25 +1,28 @@
 ```
     _____	_____  _____  _____  ______			
-   //__//  /  __/ /_  _/ /    / / __  /
-  //__//  / /__    / /  / ___/ / / / /
- //__//  /__  /   / /  / / \  / /_/ /
+   //  //  /  __/ /_  _/ /    / / __  /
+  //--//  / /__    / /  / ___/ / / / /
+ //  //  /__  /   / /  / / \  / /_/ /
 //  //	/____/   /_/  /_/ \_\/_____/ 
 
-```
+    _____   _____           _____
+   //  //  / ___/          /  __/
+  //--//  / /    ______   / /__
+ //  //  / /__  /_____/  /    /
+//  //	/____/          /____/
 
+```
+Copyright Astro Computing Inc. 1971
 
 Congratulations on the purchase of your brand new Astro Computing Inc. AC-6 Vessel Control System!
 
 This Manual will explain all about your new purchase, and its operational procedures. See the 
-section reference for specific information. Should you  encounter any issues with your Astro 
+section reference for specific information. Should you encounter any issues with your Astro 
 Computing Inc. AC-6 Vessel Control System please see an Astro Computing Inc. Safety Representative 
 immediately.
 
 ##Introduction
-Astro Computing Inc. has manufactured computers since the first Apollo Guidance Computer, 
-and has dominated the market with their Fantastic Customer Service Policy and Exceptional Customer 
-Safety Agreement. Now, they produce Outstanding Vessel Guidance, Control, Managment, Life Support and 
-Cafeteria control systems. 
+THIS CPU IS DANK
 
 ##CPU
 The AC-6 CPU is the heart and soul of your spaceship control system. It is a 12-bit wordlength
@@ -32,31 +35,20 @@ ACC     |Accumumlator   |12  |Stores results of operations.
 PC      |Program Counter|12  |Current location in memory of CPU.
 SP      |Stack Pointer  |12  |Allows function calls by storing address of the top of the stack
 X, Y, Z |General        |8   |General purpose registers, useful for anything!
-I, J    |Big Register   |12  |Large 12 bit general purpose registers.
 FLG     |Flags          |7   |Stores flags, for extending operations.
 
-
-####Flag Regiser Composition
-The flag register is layed out as separate binary sections which alter the function of the CPU.
-
-#####Indirect Address Flag
-The first bit of the flag register controls how addressing works.
+###Word Layout
+The 12-bit word of the AC-6 is structured to allow more complex instructions to be performed.
 
 ```
-|0|operate directly on A      |
-|1|use address pointed to by A|
+AOOOXXXXXXXX
 ```
 
-#####Register select flags
-The 3rd and 4th bits are the register select flags. They choose which register the LDA, ADD and SUB
-intructions operate on.
+**A**
+The first two bits are the *Addressing Mode* bits. They specify which of the 4 addressing
+modes are used for this operation.
 
-```
-|00|ACC|
-|01|X  |
-|10|Y  |
-|11|Z  |
-```
+1. Value: use the 8-bit 
 
 ###Operation Codes
 
