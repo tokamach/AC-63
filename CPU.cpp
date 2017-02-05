@@ -73,7 +73,7 @@ void CPU::cycle()
 	ACC = getMemory(PC + 1);
 	PC += 2;
 	break;
-
+	
 	//ADD: Add A to ACC
     case 0x03:
 	ACC += getMemory(PC + 1);
