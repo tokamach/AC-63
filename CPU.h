@@ -7,24 +7,24 @@ using byte = uint8_t;
 
 class CPU
 {
-	public:
-		void init();
-		void cycle();
-		void setMemory(short address, byte data);
-		byte getMemory(short address);
+ public:
+    void init();
+    void cycle();
+    void setMemory(short address, byte data);
+    byte getMemory(short address);
 
-		byte opCode;
-		byte ram[4096];
-		short ACC;
-		byte X;
-		byte Y;
-		byte Z;
-		short PC;
-        short SP;
-        byte FLG;
+    byte opCode;
+    byte ram[4096];
+    short ACC;
+    byte X;
+    byte Y;
+    byte Z;
+    short PC;
+    short SP;
+    byte FLG;
 
-	 private:
-		bool runCpu;
+ private:
+    bool runCpu;
 };
 
 #endif
