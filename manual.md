@@ -22,7 +22,7 @@ Computing Inc. AC-6 Vessel Control System please see an Astro Computing Inc. Saf
 immediately.
 
 ##Introduction
-THIS CPU IS DANK
+Hallo dan
 
 ##CPU
 The AC-6 CPU is the heart and soul of your spaceship control system. It is a 12-bit wordlength
