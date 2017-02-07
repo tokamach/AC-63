@@ -29,6 +29,7 @@ void CPU::setMemory(short address, short data)
     if(address > 4095)
     {
 	//Logic for Memory mapped I/O here
+	puts("MMIO Write Call");
     }
     else
     {
@@ -48,7 +49,8 @@ byte CPU::getMemory(short address)
     if(address > 4095)
     {
 	//Logic for MMIO here	
-	
+
+	puts("MMIO Read Call");
         return 0x00; // dummy logic best logic
     }
     else
@@ -59,15 +61,24 @@ byte CPU::getMemory(short address)
 
 void CPU::cycle()
 {
-    opCode = getMemory(PC);
+    short curWord = getMemory(PC);
 
-    
+    byte opCode = OPERAND_MASK && opCode;
+    bool indirect_bit = (INDIR_MASK && opCode) >> 6;
+    bool zero_bit = (ZERO_MASK && opCode) >> 7;
 
     switch(opCode)
     {
 	//AND: bitwise and arg with ACC
     case 0:
-	ACC &= 
+	ACC &= arg;
+	PC += 1;
+	break;
+
+	//JMP: unconditional jump to arg
+    case 1:
+	if(
+	PC = arg;
 	break;
 	
 	//Don't know what to do here
