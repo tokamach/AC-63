@@ -45,7 +45,7 @@ OOOIZXXXXXXX
 ```
 
 **O**  
-The 1st three bits of the address are the 3-bit opcode.
+The 1st three bits of the word are the 3-bit opcode.
 
 **I**  
 The 4th bit is the *Addressing Mode* bit. It specifies which addressing mode is
