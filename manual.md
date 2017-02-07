@@ -44,24 +44,24 @@ The 12-bit word of the AC-6 is structured to allow more complex instructions to 
 OOOIZXXXXXXX
 ```
 
-**O**
+**O**  
 The 1st three bits of the address are the 3-bit opcode.
 
-**I**
+**I**  
 The 4th bit is the *Addressing Mode* bit. It specifies which addressing mode is
 used for this operation.
 
 0. Direct: Use the 7-bits directly
 1. Indirect: Use the 7-bits to construct a 12-bit address, which contains the operand
 
-**Z**
+**Z**  
 The 5th bit is the *Zero* bit. It specifies how the additional 5 bits needed
 to make a 12 bit word are treated.
 
 0. Filled with zeros.
 1. Uses the 5 high order bits of the PC.
 
-**X**
+**X**  
 The remaining 7 bits are the operand. As per the previous flags these will
 be used either directly, or to redirect
 
