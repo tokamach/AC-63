@@ -2,6 +2,11 @@
 
 #include<iostream>
 
+const short OPCODE_MASK  = 0b111000000000;
+const short INDIR_MASK   = 0b000100000000;
+const short ZERO_MASK    = 0b000010000000;
+const short OPERAND_MASK = 0b000001111111;
+
 void CPU::init()
 {
     //Bleep bloop
@@ -15,11 +20,11 @@ void CPU::init()
     for(int i = 0; i < 4095; i++)
     {
 	//It gets weird if you don't
-	ram[i] = 0x00;
+	ram[i] = 0x000;
     }
 }
 
-void CPU::setMemory(short address, byte data)
+void CPU::setMemory(short address, short data)
 {
     if(address > 4095)
     {
@@ -27,7 +32,14 @@ void CPU::setMemory(short address, byte data)
     }
     else
     {
-	ram[address] = data;
+	if(data > 4095)
+	{
+	    ram[address] = data;
+	}
+	else
+	{
+	    ram[address] = data && (0b1111000000000000)
+	}
     }
 }
 
@@ -49,46 +61,15 @@ void CPU::cycle()
 {
     opCode = getMemory(PC);
 
-    byte regSel = 0;
-
+    
 
     switch(opCode)
     {
-	//NOP: No Operation
-    case 0x00:
-	//Do nothing
-	PC += 1;
-	break;
-
-	//JMP: goto address specified
-    case 0x01:
-	PC = getMemory(PC+1);
-	break;
-
-	//LDA: load A into ACC
-    case 0x02:
-	regSel = (0b00110000 || FLG) >> 4;
-	printf("%i", regSel);
-
-	ACC = getMemory(PC + 1);
-	PC += 2;
+	//AND: bitwise and arg with ACC
+    case 0:
+	ACC &= 
 	break;
 	
-	//ADD: Add A to ACC
-    case 0x03:
-	ACC += getMemory(PC + 1);
-	PC += 2;
-	break;
-
-        //SUB: 
-    case 0x04:
-	ACC -= getMemory(PC + 1);
-	PC += 2;
-	break;
-
-        //JSR: 
-        
-			
 	//Don't know what to do here
     default:
 	//Lalalalalalala

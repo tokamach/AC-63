@@ -14,7 +14,7 @@ class CPU
     byte getMemory(short address);
 
     byte opCode;
-    byte ram[4096];
+    short ram[4096]; //12 bit
     short ACC;
     byte X;
     byte Y;
