@@ -63,7 +63,7 @@ void CPU::cycle()
 {
     short curWord = getMemory(PC);
 
-    byte opCode = OPERAND_MASK && opCode;
+    byte opCode = (OPERAND_MASK && opCode);
     bool indirect_bit = (INDIR_MASK && opCode) >> 6;
     bool zero_bit = (ZERO_MASK && opCode) >> 7;
 

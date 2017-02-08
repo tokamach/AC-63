@@ -13,7 +13,6 @@ class CPU
     void setMemory(short address, byte data);
     byte getMemory(short address);
 
-    byte opCode;
     short ram[4096]; //12 bit
     short ACC;
     byte X;
