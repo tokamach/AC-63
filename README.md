@@ -1,4 +1,4 @@
-#Astro (I need a new name)
+# Astro (I need a new name)
 
 Astro should be a game about running a spaceship, powered by a small 
 and weak CPU. I'm going for 0x10c but a couple decades back.
