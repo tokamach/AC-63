@@ -21,14 +21,11 @@ section reference for specific information. Should you encounter any issues with
 Computing Inc. AC-6 Vessel Control System please see an Astro Computing Inc. Safety Representative 
 immediately.
 
-##Introduction
-Hallo dan
-
-##CPU
+## CPU
 The AC-6 CPU is the heart and soul of your spaceship control system. It is a 12-bit wordlength
 computer. The largest representable number in 12 bits is 4095, 
 
-###Registers
+### Registers
 Register|Purpose        |Bits|Description
 --------|---------------|----|----------
 ACC     |Accumumlator   |12  |Stores results of operations.
@@ -37,7 +34,7 @@ SP      |Stack Pointer  |12  |Allows function calls by storing address of the to
 X, Y, Z |General        |8   |General purpose registers.
 FLG     |Flags          |7   |Stores flags, for extending operations.
 
-###Word Layout
+### Word Layout
 The 12-bit word of the AC-6 is structured to allow more complex instructions to be performed.
 
 ```
@@ -81,7 +78,7 @@ BNE X    |007|111|Jump to A if P = 0
 BEQ X    |008|010|Jump to A if P = 1
 
 
-##Interface
+## Interface
 
 The Astro Computing Inc. AC-6 Vessel Control System is controlled at it's heart by an Astro
 Computing Inc. TeleTerminal product. However, you may only have one of these units aboard your
