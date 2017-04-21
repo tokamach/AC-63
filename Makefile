@@ -1,11 +1,13 @@
-All: cputest
+all: panel
 
-cputest:
-	clang --std=c++11 CPU.cpp Panel.cpp TestRig.cpp -lncurses -I. -o PanelTest
+panel:
+	clang++ --std=c++14 CPU.cpp Panel.cpp TestRig.cpp -lncurses -I. -o PanelTest
 
-game: 
-	clang --std=c++11 Main.cpp Astro.cpp Player.cpp -lncurses -I. -o Astro
+test: 
+	clang++ --std=c++14 CPU.cpp Test.cpp -I. -o tests
+	./tests
+	rm tests
 
 clean:
 	rm PanelTest
-	rm Astro
+	rm tests
