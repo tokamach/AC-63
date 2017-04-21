@@ -59,9 +59,10 @@ void CPU::cycle()
 {
     short curWord = getMemory(PC);
 
-    byte opCode = (OPERAND_MASK && opCode);
-    bool indirect_bit = (INDIR_MASK && opCode) >> 6;
-    bool zero_bit = (ZERO_MASK && opCode) >> 7;
+    byte opCode       = (OPCODE_MASK  && curWord) >> 9;
+    bool indirect_bit = (INDIR_MASK   && curWorw) >> 8;
+    bool zero_bit     = (ZERO_MASK    && curWord) >> 7;
+    byte arg          = (OPERAND_MASK && curWord);
 
     switch(opCode)
     {
@@ -73,7 +74,7 @@ void CPU::cycle()
 
 	//JMP: unconditional jump to arg
     case 1:
-	if(
+	//if(
 	PC = arg;
 	break;
 	
