@@ -1,8 +1,7 @@
-#include <stdint.h>
+#pragma once
 
+#include <stdint.h>
 #include "CPU.h"
-#ifndef __TERMINAL_H__
-#define __TERMINAL_H__
 
 class Panel
 {
@@ -46,5 +45,3 @@ class Panel
 	  int singleStepSwitch = 0;
 
 };
-
-#endif

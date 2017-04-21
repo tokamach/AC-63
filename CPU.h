@@ -1,7 +1,6 @@
-#include <stdint.h>
+#pragma once
 
-#ifndef __CPU_H__
-#define __CPU_H__
+#include <stdint.h>
 
 using byte = uint8_t;
 
@@ -25,5 +24,3 @@ class CPU
  private:
     bool runCpu;
 };
-
-#endif
