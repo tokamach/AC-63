@@ -1,6 +1,8 @@
-#include "Panel.h"
 #include <ncurses.h>
 #include <iostream>
+
+#include "CPU.h"
+#include "Panel.h"
 
 int main()
 {

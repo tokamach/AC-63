@@ -28,7 +28,7 @@ PC      |Program Counter|12  |Current location in memory of CPU.
 SP      |Stack Pointer  |12  |Allows function calls by storing address of the top of the stack
 X, Y, Z |General        |12  |Big General purpose registers.
 I, J, K |General        |8   |Small General purpose registers.
-FLG     |Flags          |7   |Stores flags, for extending operations.
+FLG     |Flags          |7   |Stores flags, for results of operations.
 
 ### Word Layout
 The 12-bit word of the AC-6 is structured to allow more complex instructions to be performed.
@@ -59,19 +59,18 @@ The remaining 7 bits are the operand. As per the previous flags these will
 be used either directly, or to redirect
 
 ### Operation Codes
-There are 7 basic instructions, each with 
+There are 7 basic instructions.
 
 Operation|Dec|Bin|Description
 ---------|---|---|------------
 AND X    |000|000|Bitwise And X with ACC
 JMP X    |001|001|Unconditionally jump to location 
 DPA X    |002|010|Deposit accumulator into X and clear
-ADD X    |003|011|Add X to ACC
-SUB X    |004|100|Subtract A from ACC
-JSR X    |005|101|Jump to subroutine A
-RTS      |006|110|Return from subroutine to address
-BNE X    |007|111|Jump to A if P = 0
-BEQ X    |008|010|Jump to A if P = 1
+TAD X    |003|011|Two's complement add X to ACC
+JSR X    |004|100|Jump to subroutine A, store return address in Z
+         |005|101|
+         |006|110|
+MIC      |007|111|Use microcode for instruction
 
 
 ## Interface
