@@ -10,7 +10,7 @@ class CPU
     void init();
     void cycle();
     void setMemory(short address, short data);
-    byte getMemory(short address);
+    short getMemory(short address);
 
     short ram[4096]; //12 bit
     short ACC;

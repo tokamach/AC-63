@@ -32,7 +32,6 @@ void CPU::init()
 
 void CPU::setMemory(short address, short data)
 {
-    std::cout << "SETTING: " << std::bitset<16>(data) << "\n";
     if(address > 4095)
     {
 	//Logic for Memory mapped I/O here
@@ -42,11 +41,9 @@ void CPU::setMemory(short address, short data)
     {
 	ram[address] = data;
     }
-    std::cout << "FRESULT: " << std::bitset<16>(getMemory(address)) << "\n";
-    std::cout << "DRESULT: " << std::bitset<16>(ram[address]) << "\n";
 }
 
-byte CPU::getMemory(short address)
+short CPU::getMemory(short address)
 {
     if(address > 4095)
     {
