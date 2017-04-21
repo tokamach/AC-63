@@ -7,8 +7,8 @@ const short INDIR_MASK   = 0b000100000000;
 const short ZERO_MASK    = 0b000010000000;
 const short OPERAND_MASK = 0b000001111111;
 
-const short TWELVE_BIT_MASK     = 0b111111111111;
-const short INV_TWELVE_BIT_MASK = 0b1111000000000000;
+const short TWELVE_BIT_MASK  = 0b111111111111;
+const short PC_HIGH_BIT_MASK = 0b111000000000;
 
 void CPU::init()
 {
@@ -17,6 +17,9 @@ void CPU::init()
     X   = 0x000;
     Y   = 0x000;
     Z   = 0x000;
+    I   = 0x00;
+    J   = 0x00;
+    K   = 0x00;
     PC  = 0x000;
     SP  = 0xf00;
     FLG = 0x000;
@@ -29,6 +32,7 @@ void CPU::init()
 
 void CPU::setMemory(short address, short data)
 {
+    std::cout << "SETTING: " << std::bitset<16>(data) << "\n";
     if(address > 4095)
     {
 	//Logic for Memory mapped I/O here
@@ -38,6 +42,8 @@ void CPU::setMemory(short address, short data)
     {
 	ram[address] = data;
     }
+    std::cout << "FRESULT: " << std::bitset<16>(getMemory(address)) << "\n";
+    std::cout << "DRESULT: " << std::bitset<16>(ram[address]) << "\n";
 }
 
 byte CPU::getMemory(short address)
@@ -60,9 +66,31 @@ void CPU::cycle()
     short curWord = getMemory(PC);
 
     byte opCode       = (OPCODE_MASK  && curWord) >> 9;
-    bool indirect_bit = (INDIR_MASK   && curWorw) >> 8;
+    bool indirect_bit = (INDIR_MASK   && curWord) >> 8;
     bool zero_bit     = (ZERO_MASK    && curWord) >> 7;
     byte arg          = (OPERAND_MASK && curWord);
+
+    if(indirect_bit)
+    {
+	if(zero_bit)
+	{
+	    //create new address from arg and zeroes for the 12 extra bits
+	    arg = getMemory((short) arg);
+	}
+	else
+	{
+	    //create new address from arg and 5 higher order bits of PC
+	    arg = getMemory((PC_HIGH_BIT_MASK && PC) + arg);
+	}
+    }
+
+    std::cout << "=CPU State=\n"
+	      << "PC is: " << std::bitset<12>(PC) << "\n"
+	      << "curword is: " << std::bitset<16>(curWord) << "\n"
+	      << "opCode is: " << std::bitset<3>(opCode) << "\n"
+	      << "indirect bit is: " << indirect_bit << "\n"
+	      << "zero bit is: " << zero_bit << "\n"
+	      << std::endl;
 
     switch(opCode)
     {
@@ -84,7 +112,7 @@ void CPU::cycle()
 	break;
 	  }
 
-    //Don't overflow past 12 bits pls
+    //Don't overflow past 12 bits
     if(PC > 4095)
     {
         PC = 0x00;
