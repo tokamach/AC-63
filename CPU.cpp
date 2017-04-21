@@ -58,14 +58,25 @@ short CPU::getMemory(short address)
     }
 }
 
+void printCPU(CPU *cpu)
+{
+    std::cout << "=CPU State=\n"
+	      << "PC is: " << std::bitset<12>(cpu->PC) << "\n"
+	      << "curword is: " << std::bitset<12>(cpu->curWord) << "\n"
+	      << "opCode is: " << std::bitset<3>(cpu->opCode) << "\n"
+	      << "indirect bit is: " << cpu->indirect_bit << "\n"
+	      << "zero bit is: " << cpu->zero_bit << "\n"
+	      << std::endl;
+}
+
 void CPU::cycle()
 {
     short curWord = getMemory(PC);
 
-    byte opCode       = (OPCODE_MASK  && curWord) >> 9;
-    bool indirect_bit = (INDIR_MASK   && curWord) >> 8;
-    bool zero_bit     = (ZERO_MASK    && curWord) >> 7;
-    byte arg          = (OPERAND_MASK && curWord);
+    byte opCode       = (OPCODE_MASK  & curWord) >> 9;
+    bool indirect_bit = (INDIR_MASK   & curWord) >> 8;
+    bool zero_bit     = (ZERO_MASK    & curWord) >> 7;
+    byte arg          = (OPERAND_MASK & curWord);
 
     if(indirect_bit)
     {
@@ -77,17 +88,9 @@ void CPU::cycle()
 	else
 	{
 	    //create new address from arg and 5 higher order bits of PC
-	    arg = getMemory((PC_HIGH_BIT_MASK && PC) + arg);
+	    arg = getMemory((PC_HIGH_BIT_MASK & PC) + arg);
 	}
     }
-
-    std::cout << "=CPU State=\n"
-	      << "PC is: " << std::bitset<12>(PC) << "\n"
-	      << "curword is: " << std::bitset<16>(curWord) << "\n"
-	      << "opCode is: " << std::bitset<3>(opCode) << "\n"
-	      << "indirect bit is: " << indirect_bit << "\n"
-	      << "zero bit is: " << zero_bit << "\n"
-	      << std::endl;
 
     switch(opCode)
     {

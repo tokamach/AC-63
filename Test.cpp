@@ -18,9 +18,9 @@ int main()
     cpu.setMemory(2, 0b001010000001);
 
     cpu.cycle();
-    //assert(cpu.PC == 2);
+    assert(cpu.PC == 2);
     cpu.cycle();
-    //assert(cpu.PC == 1);
+    assert(cpu.PC == 1);
 
     //reset CPU
     cpu.init();
