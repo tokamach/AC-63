@@ -7,6 +7,9 @@ const short INDIR_MASK   = 0b000100000000;
 const short ZERO_MASK    = 0b000010000000;
 const short OPERAND_MASK = 0b000001111111;
 
+const short TWELVE_BIT_MASK     = 0b111111111111;
+const short INV_TWELVE_BIT_MASK = 0b1111000000000000;
+
 void CPU::init()
 {
     //Bleep bloop
@@ -33,14 +36,7 @@ void CPU::setMemory(short address, short data)
     }
     else
     {
-	if(data > 4095)
-	{
-	    ram[address] = data;
-	}
-	else
-	{
-	    ram[address] = data && (0b1111000000000000)
-	}
+	ram[address] = data;
     }
 }
 
