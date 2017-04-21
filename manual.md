@@ -26,7 +26,8 @@ Register|Purpose        |Bits|Description
 ACC     |Accumumlator   |12  |Stores results of operations.
 PC      |Program Counter|12  |Current location in memory of CPU.
 SP      |Stack Pointer  |12  |Allows function calls by storing address of the top of the stack
-X, Y, Z |General        |8   |General purpose registers.
+X, Y, Z |General        |12  |Big General purpose registers.
+I, J, K |General        |8   |Small General purpose registers.
 FLG     |Flags          |7   |Stores flags, for extending operations.
 
 ### Word Layout
@@ -57,14 +58,14 @@ to make a 12 bit word are treated.
 The remaining 7 bits are the operand. As per the previous flags these will
 be used either directly, or to redirect
 
-###Operation Codes
-There are 7 basic instructions, 
+### Operation Codes
+There are 7 basic instructions, each with 
 
 Operation|Dec|Bin|Description
 ---------|---|---|------------
 AND X    |000|000|Bitwise And X with ACC
 JMP X    |001|001|Unconditionally jump to location 
-DPA X    |002|010|Deposit and clear accumulator in X
+DPA X    |002|010|Deposit accumulator into X and clear
 ADD X    |003|011|Add X to ACC
 SUB X    |004|100|Subtract A from ACC
 JSR X    |005|101|Jump to subroutine A
