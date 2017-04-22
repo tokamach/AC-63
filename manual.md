@@ -63,11 +63,11 @@ There are 7 basic instructions.
 
 Operation|Dec|Bin|Description
 ---------|---|---|------------
-AND X    |000|000|Bitwise And X with ACC
-JMP X    |001|001|Unconditionally jump to location 
-DPA X    |002|010|Deposit accumulator into X and clear
-TAD X    |003|011|Two's complement add X to ACC
-JSR X    |004|100|Jump to subroutine A, store return address in Z
+AND A    |000|000|Bitwise And A with ACC
+JMP A    |001|001|Unconditionally jump to location 
+DPA A    |002|010|Deposit accumulator into A and clear
+TAD A    |003|011|Two's complement add A to ACC
+JSR A    |004|100|Jump to subroutine A, store return address in Z
          |005|101|
          |006|110|
 MIC      |007|111|Use microcode for instruction
