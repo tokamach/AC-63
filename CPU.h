@@ -12,6 +12,8 @@ class CPU
     void setMemory(short address, short data);
     short getMemory(short address);
 
+    void printCPU();
+
     short ram[4096]; //12 bit
     short ACC;
     short X;

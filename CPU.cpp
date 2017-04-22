@@ -58,14 +58,15 @@ short CPU::getMemory(short address)
     }
 }
 
-void printCPU(CPU *cpu)
+void CPU::printCPU()
 {
     std::cout << "=CPU State=\n"
-	      << "PC is: " << std::bitset<12>(cpu->PC) << "\n"
-	      << "curword is: " << std::bitset<12>(cpu->curWord) << "\n"
-	      << "opCode is: " << std::bitset<3>(cpu->opCode) << "\n"
-	      << "indirect bit is: " << cpu->indirect_bit << "\n"
-	      << "zero bit is: " << cpu->zero_bit << "\n"
+	      << "PC is: " << std::bitset<12>(PC) << "\n"
+	      << "ACC is: " << std::bitset<12>(ACC) << "\n"
+	//  << "curword is: " << std::bitset<12>(curWord) << "\n"
+	//  << "opCode is: " << std::bitset<3>(opCode) << "\n"
+	//  << "indirect bit is: " << indirect_bit << "\n"
+	//  << "zero bit is: " << zero_bit << "\n"
 	      << std::endl;
 }
 
@@ -76,14 +77,14 @@ void CPU::cycle()
     byte opCode       = (OPCODE_MASK  & curWord) >> 9;
     bool indirect_bit = (INDIR_MASK   & curWord) >> 8;
     bool zero_bit     = (ZERO_MASK    & curWord) >> 7;
-    byte arg          = (OPERAND_MASK & curWord);
+    short arg         = (OPERAND_MASK & curWord);
 
     if(indirect_bit)
     {
 	if(zero_bit)
 	{
 	    //create new address from arg and zeroes for the 12 extra bits
-	    arg = getMemory((short) arg);
+	    arg = getMemory(arg);
 	}
 	else
 	{
@@ -102,15 +103,34 @@ void CPU::cycle()
 
 	//JMP: unconditional jump to arg
     case 1:
-	//if(
 	PC = arg;
+	break;
+
+	//DPA: deposit ACC into arg and clear ACC
+    case 2:
+	setMemory(arg, ACC);
+	ACC = 0;
+	PC += 1;
+	break;
+
+	//TAD: two's complement add ARG into ACC
+    case 3:
+	ACC += arg;
+	PC += 1;
+	break;
+
+	//JSR: jump to subroutine arg, and deposit return address in Z
+    case 4:
+	
+	PC += 1;
 	break;
 	
 	//Don't know what to do here
     default:
 	//Lalalalalalala
 	break;
-	  }
+    }
+
 
     //Don't overflow past 12 bits
     if(PC > 4095)
