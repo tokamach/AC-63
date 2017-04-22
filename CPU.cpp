@@ -121,8 +121,8 @@ void CPU::cycle()
 
 	//JSR: jump to subroutine arg, and deposit return address in Z
     case 4:
-	
-	PC += 1;
+	Z  = PC;
+	PC = arg;
 	break;
 	
 	//Don't know what to do here

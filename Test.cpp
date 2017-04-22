@@ -45,6 +45,18 @@ int main()
     cpu.cycle();
     cpu.cycle();
     assert(cpu.getMemory(10) == 50);
+
+    cpu.init();
+
+    ///JSR
+    //JMP 10
+    cpu.setMemory(0, 0b001000001010);
+    cpu.setMemory(10, 0b100001111111);
+
+    cpu.cycle();
+    cpu.cycle();
+
+    assert(cpu.Z == 10);
     
     std::cout << "Tests finished succesfully!\n";
     return(0);
