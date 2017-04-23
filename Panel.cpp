@@ -79,7 +79,12 @@ void Panel::drawPanel(int xoff, int yoff)
 		addch('+');
 	    }
 	    
-	    if(j > 0 && j < 23 && i == 76)
+	    if(j > 0 && j < 23 && i == 70)
+	    {
+		addch('!');
+	    }
+
+	    if(j > 0 && j < 23 && i == 82)
 	    {
 		addch('!');
 	    }
@@ -135,7 +140,7 @@ void Panel::drawLightAt(int x, int y, int index, LightType type)
     //This function is ugly. It's awful. But it works.
     if(type == DATA)
     {
-	if(index > 7)
+	if(index > 11)
 	    return;
 	
 	else
