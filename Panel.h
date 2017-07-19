@@ -16,6 +16,7 @@ public:
     void updateFromInput();
     
     //Drawing functions
+    void drawDebugInfo();
     void drawPanel(int xoff, int yoff);
     void drawToggleSwitchAt(int x, int y, bool state);
     void drawFlickSwitchAt(int x, int y, int state);

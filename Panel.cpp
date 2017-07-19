@@ -2,6 +2,7 @@
 #include  <iostream>
 #include  <stdint.h>
 
+#include "CPU.h"
 #include "Panel.h"
 
 void Panel::init(CPU *cpu_)
@@ -19,6 +20,25 @@ void Panel::update()
     }	
     setAddressLightsFromShort(cpu->PC);
     setDataLightsFromWord(cpu->getMemory(cpu->PC));
+}
+
+void Panel::drawDebugInfo()
+{
+    //TODO: clear string length each preframe
+    move(0, 0); clrtoeol();
+    move(1, 0); clrtoeol();
+    move(2, 0); clrtoeol();
+
+    mvaddstr(0, 0, std::to_string(cpu->X).c_str());
+    mvaddstr(1, 0, std::to_string(cpu->Y).c_str());
+    mvaddstr(2, 0, std::to_string(cpu->Z).c_str());
+
+    mvaddstr(0, 5, std::to_string(cpu->I).c_str());
+    mvaddstr(0, 5, std::to_string(cpu->J).c_str());
+    mvaddstr(0, 5, std::to_string(cpu->K).c_str());
+
+    mvaddstr(0, 10, std::to_string(cpu->PC).c_str());
+    mvaddstr(1, 10, std::to_string(cpu->ACC).c_str());
 }
 
 void Panel::drawPanel(int xoff, int yoff)
@@ -111,19 +131,19 @@ void Panel::drawPanel(int xoff, int yoff)
     addstr("STEP");
     
     //Draw the switches
-    for(int i = 0; i <= 11; i++)
+    for(int i = 0; i < 12; i++)
     {
 	drawToggleSwitchAt(xoff - (i * 6) + 120, 18 + yoff, switchArray[i]);
     }
     
     //Draw the data lights
-    for(int i = 0; i <= 11; i++)
+    for(int i = 0; i < 12; i++)
     {
 	drawLightAt(xoff - (i * 6) + 120, 7 + yoff, i, DATA);
     }
     
     //Draw the address lights
-    for(int i = 0; i <= 11; i++)
+    for(int i = 0; i < 12; i++)
     {
 	drawLightAt(xoff - (i * 6) + 120, 13 + yoff, i, ADDRESS);
     }
@@ -411,12 +431,12 @@ void Panel::setSwitch(int set, bool state)
 
 void Panel::setDataLightsFromWord(short set)
 {
-    for(int i = 0; i <= 11; i++)
+    for(int i = 0; i < 12; i++)
 	dataLightArray[i] = (set >> i) & 1;
 }
 
 void Panel::setAddressLightsFromShort(short set)
 {
-    for(int i = 0; i <= 11; i++)
+    for(int i = 0; i < 12; i++)
 	addressLightArray[i] = (set >> i) & 1;
 }
