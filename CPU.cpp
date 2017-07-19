@@ -63,7 +63,7 @@ void CPU::printCPU()
     std::cout << "=CPU State=\n"
 	      << "PC is: " << std::bitset<12>(PC) << "\n"
 	      << "ACC is: " << std::bitset<12>(ACC) << "\n"
-	//  << "curword is: " << std::bitset<12>(curWord) << "\n"
+	      << "curword is: " << std::bitset<12>(getMemory(PC)) << "\n"
 	//  << "opCode is: " << std::bitset<3>(opCode) << "\n"
 	//  << "indirect bit is: " << indirect_bit << "\n"
 	//  << "zero bit is: " << zero_bit << "\n"
