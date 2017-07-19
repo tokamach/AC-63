@@ -27,6 +27,7 @@ int main()
     
     while(true)
     {
+	panel.drawDebugInfo();
 	panel.drawPanel(10, 4);
 	panel.update();
     }
