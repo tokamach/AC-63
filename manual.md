@@ -40,10 +40,10 @@ There are 7 basic instructions.
 Operation|Dec|Bin|Description
 ---------|---|---|------------
 AND A    |000|000|Bitwise And A with ACC
-JMP A    |001|001|Unconditionally jump to location 
+JMP A    |001|001|Jump to A
 DPA A    |002|010|Deposit ACC into A and clear ACC
 ADD A    |003|011|Add A to ACC
-JMP A    |004|100|Jump to A
+PLC      |004|100|Placeholder
 JEZ A    |005|101|Jump to A+1 if next word is Zero, store return address in A, otherwise increment PC by 2
 PLC      |006|110|Placeholder for now
 MIC      |007|111|Use microcode for instruction

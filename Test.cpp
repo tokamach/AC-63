@@ -24,16 +24,18 @@ int main()
 
     //reset CPU
     cpu.init();
+    
 
-    ///TAD
+    ///ADD
     cpu.setMemory(127, 10);
-    //TAD I X 127
+    //ADD I X 127
     cpu.setMemory(0, 0b011111111111);
     cpu.cycle();
 
     assert(cpu.ACC == 10);
 
     cpu.init();
+
 
     ///DPA
     cpu.setMemory(127, 50);
@@ -48,15 +50,19 @@ int main()
 
     cpu.init();
 
-    ///JSR
+
+    ///JEZ
     //JMP 10
-    cpu.setMemory(0, 0b001000001010);
-    cpu.setMemory(10, 0b100001111111);
+    cpu.setMemory(0,  0b001000001010);
+    //JEZ 20
+    cpu.setMemory(10, 0b100000010100);
 
     cpu.cycle();
     cpu.cycle();
 
-//  assert(cpu.Z == 10);
+    assert(cpu.getMemory(20) == 10);
+    assert(cpu.PC == 21);
+    
     
     std::cout << "Tests finished succesfully!\n";
     return(0);
