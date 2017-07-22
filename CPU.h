@@ -16,13 +16,6 @@ class CPU
 
     short ram[4096]; //12 bit
     short ACC;
-    short   X;
-    short   Y;
-    short   Z;
-
-    byte    I;
-    byte    J;
-    byte    K;
 
     short  PC;
     short  SP;

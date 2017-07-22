@@ -1,14 +1,10 @@
 # AC-6 CPU spec
-The AC-6 CPU is the heart and soul of your spaceship control system. It is a 12-bit wordlength computer. The largest representable number in 12 bits is 4095, 
-
 ## Registers
 Register|Purpose        |Bits|Description
 --------|---------------|----|----------
 ACC     |Accumumlator   |12  |Stores results of operations.
 PC      |Program Counter|12  |Current location in memory of CPU.
 SP      |Stack Pointer  |12  |Allows function calls by storing address of the top of the stack
-X, Y, Z |General        |12  |Big General purpose registers.
-I, J, K |General        |8   |Small General purpose registers.
 FLG     |Flags          |7   |Stores flags, for results of operations.
 
 ## Word Layout

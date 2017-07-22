@@ -14,12 +14,6 @@ void CPU::init()
 {
     //Bleep bloop
     ACC = 0x000;
-    X   = 0x000;
-    Y   = 0x000;
-    Z   = 0x000;
-    I   = 0x00;
-    J   = 0x00;
-    K   = 0x00;
     PC  = 0x000;
     SP  = 0xf00;
     FLG = 0x000;
@@ -121,7 +115,7 @@ void CPU::cycle()
 
 	//JSR: jump to subroutine arg, and deposit return address in Z
     case 4:
-	Z  = PC;
+	//Z  = PC;
 	PC = arg;
 	break;
 	
