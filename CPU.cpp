@@ -107,16 +107,26 @@ void CPU::cycle()
 	PC += 1;
 	break;
 
-	//TAD: two's complement add ARG into ACC
+	//ADD: add ARG into ACC
     case 3:
 	ACC += arg;
 	PC += 1;
 	break;
 
-	//JSR: jump to subroutine arg, and deposit return address in Z
+	//JMP: jump to arg
     case 4:
-	//Z  = PC;
 	PC = arg;
+	break;
+
+    case 5:
+	//JEZ: jump to arg+1 if PC+1 == 0, store return in arg
+	if(getMemory(PC+1) == 0)
+	{
+	    setMemory(arg, PC);
+	    PC = arg + 1;
+	} else {
+	    PC += 2;
+	}
 	break;
 	
 	//Don't know what to do here
