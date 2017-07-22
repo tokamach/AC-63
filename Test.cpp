@@ -55,7 +55,7 @@ int main()
     //JMP 10
     cpu.setMemory(0,  0b001000001010);
     //JEZ 20
-    cpu.setMemory(10, 0b100000010100);
+    cpu.setMemory(10, 0b101000010100);
 
     cpu.cycle();
     cpu.cycle();

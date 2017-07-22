@@ -114,9 +114,9 @@ void CPU::cycle()
 	break;
 
 	//JMP: jump to arg
-    case 4:
+/*  case 4:
 	PC = arg;
-	break;
+	break; */
 
     case 5:
 	//JEZ: jump to arg+1 if PC+1 == 0, store return in arg
