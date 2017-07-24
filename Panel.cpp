@@ -263,78 +263,107 @@ void Panel::updateFromInput()
     case 27:
 	//todo Implement exit mechanics
 	break;
-	
-	//Equals: =
-    case 61:
+
+	//Data section of word
+    case '0':
 	toggleSwitch(0);
 	break;
 	
-    case 45:
+    case '9':
 	toggleSwitch(1);
 	break;
 	
-    case 48:
+    case '8':
 	toggleSwitch(2);
 	break;
 	
-    case 57:
+    case '7':
 	toggleSwitch(3);
 	break;
 	
-    case 56:
+    case '6':
 	toggleSwitch(4);
 	break;
 	
-    case 55:
+    case '5':
 	toggleSwitch(5);
 	break;
 	
-    case 54:
+    case '4':
 	toggleSwitch(6);
 	break;
 	
-    case 53:
+    case '3':
 	toggleSwitch(7);
 	break;
 	
-    case 52:
+    case '2':
 	toggleSwitch(8);
 	break;
 	
-    case 51:
+    case '1':
 	toggleSwitch(9);
 	break;
-	
-    case 50:
+
+	//Register section
+    case ';':
 	toggleSwitch(10);
 	break;
-	
-    case 49:
+
+    case 'l':
 	toggleSwitch(11);
 	break;
+
+	//Indirect/Paging
+    case 'k':
+	toggleSwitch(12);
+	break;
+
+    case 'j':
+	toggleSwitch(13);
+	break;
+
+	//opcode section
+    case 'f':
+	toggleSwitch(14);
+	break;
+
+    case 'd':
+	toggleSwitch(15);
+	break;
+
+    case 's':
+	toggleSwitch(16);
+	break;
+
+    case 'a':
+	toggleSwitch(17);
+	break;
+
+	//Control Keys
 	//Read switch: r
-    case 114:
+    case 'r':
 	cpu->PC = getAddressFromSwitches();
 	break;
 	
 	//Start switch: q
-    case 113:
+    case 'q':
 	toggleStartSwitch();
 	break;
 	
 	//Single step: e
-    case 101:
+    case 'e':
 	cpu->cycle();
 	singleStepSwitch = !singleStepSwitch;
 	break;
 	
 	//Write: w
-    case 119:
+    case 'w':
 	cpu->setMemory(cpu->PC, getDataFromSwitches());
 	break;
 	
 	//Reset: t
-    case 116:
+    case 't':
 	cpu->PC = 0x00;
 	break;
 	
@@ -367,7 +396,7 @@ short Panel::getDataFromSwitches()
 
 void Panel::toggleSwitch(int set)
 {
-    if(set>11)
+    if(set>17)
 	return;
     
     switchArray[set] = !switchArray[set];
