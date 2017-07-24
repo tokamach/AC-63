@@ -1,7 +1,10 @@
 all: panel
 
 panel:
-	clang++ --std=c++14 CPU.cpp Panel.cpp TestRig.cpp -lncurses -I. -o PanelTest
+	clang++ --std=c++14 CPU.cpp Panel.cpp TestRig.cpp -lncurses -I. -o paneltest
+
+run: panel
+	./paneltest
 
 test: 
 	clang++ --std=c++14 CPU.cpp Test.cpp -I. -o tests
@@ -9,5 +12,7 @@ test:
 	rm tests
 
 clean:
-	rm PanelTest
+	rm paneltest
 	rm tests
+
+once: run clean
