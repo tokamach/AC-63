@@ -1,35 +1,43 @@
 #include "CPU.h"
 
-#include<iostream>
+#include <iostream>
 
-const short OPCODE_MASK  = 0b111000000000;
-const short INDIR_MASK   = 0b000100000000;
-const short ZERO_MASK    = 0b000010000000;
-const short OPERAND_MASK = 0b000001111111;
+const word OPCODE_MASK  = 0b111100000000000000;
+const word INDIR_MASK   = 0b000010000000000000;
+const word ZERO_MASK    = 0b000001000000000000;
+const word OPERAND_MASK = 0b000000111111111111;
 
-const short TWELVE_BIT_MASK  = 0b111111111111;
-const short PC_HIGH_BIT_MASK = 0b111000000000;
+const word EIGHTEEN_BIT_MASK = 0b111111111111111111;
+const word PC_HIGH_BIT_MASK  = 0b111100000000000000;
+
+//const word MAX_VAL = 262143; // largest 18-bit number
 
 void CPU::init()
 {
     //Bleep bloop
-    ACC = 0x000;
-    PC  = 0x000;
-    SP  = 0xf00;
-    FLG = 0x000;
-    for(int i = 0; i < 4095; i++)
+    ACC = 0x00000;
+    PC  = 0x00000;
+    SP  = 0x3FFFF;
+    FLG = 0x00;
+
+    REG[0] = 0x00000;
+    REG[1] = 0x00000;
+    REG[2] = 0x00000;
+    REG[3] = 0x00000;
+
+    for(int i = 0; i < MAX_VAL; i++)
     {
 	//It gets weird if you don't
-	ram[i] = 0x000;
+	ram[i] = 0x00000;
     }
 }
 
-void CPU::setMemory(short address, short data)
+void CPU::setMemory(word address, word data)
 {
-    if(address > 4095)
+    if(address > MAX_VAL)
     {
 	//Logic for Memory mapped I/O here
-	puts("MMIO Write Call");
+	printf("MMIO Write Call");
     }
     else
     {
@@ -37,14 +45,14 @@ void CPU::setMemory(short address, short data)
     }
 }
 
-short CPU::getMemory(short address)
+word CPU::getMemory(word address)
 {
-    if(address > 4095)
+    if(address > MAX_VAL)
     {
 	//Logic for MMIO here	
 
-	puts("MMIO Read Call");
-        return 0x00; // dummy logic best logic
+	printf("MMIO Read Call at: %i", address);
+        return 0x00000; // dummy logic best logic
     }
     else
     {
@@ -55,9 +63,9 @@ short CPU::getMemory(short address)
 void CPU::printCPU()
 {
     std::cout << "=CPU State=\n"
-	      << "PC is: " << std::bitset<12>(PC) << "\n"
-	      << "ACC is: " << std::bitset<12>(ACC) << "\n"
-	      << "curword is: " << std::bitset<12>(getMemory(PC)) << "\n"
+	      << "PC is: " << std::bitset<18>(PC) << "\n"
+	      << "ACC is: " << std::bitset<18>(ACC) << "\n"
+	      << "curword is: " << std::bitset<18>(getMemory(PC)) << "\n"
 	//  << "opCode is: " << std::bitset<3>(opCode) << "\n"
 	//  << "indirect bit is: " << indirect_bit << "\n"
 	//  << "zero bit is: " << zero_bit << "\n"
@@ -66,11 +74,11 @@ void CPU::printCPU()
 
 void CPU::cycle()
 {
-    short curWord = getMemory(PC);
+    word curWord = getMemory(PC);
 
-    byte opCode       = (OPCODE_MASK  & curWord) >> 9;
-    bool indirect_bit = (INDIR_MASK   & curWord) >> 8;
-    bool zero_bit     = (ZERO_MASK    & curWord) >> 7;
+    byte opCode       = (OPCODE_MASK  & curWord) >> 15;
+    bool indirect_bit = (INDIR_MASK   & curWord) >> 14;
+    bool zero_bit     = (ZERO_MASK    & curWord) >> 13;
     short arg         = (OPERAND_MASK & curWord);
 
     if(indirect_bit)
@@ -136,9 +144,9 @@ void CPU::cycle()
     }
 
 
-    //Don't overflow past 12 bits
-    if(PC > 4095)
+    //Don't overflow past 18 bits
+    if(PC >= MAX_VAL)
     {
-        PC = 0x00;
+        PC = 0x00000;
     }
 }

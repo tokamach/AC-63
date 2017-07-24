@@ -3,23 +3,27 @@
 #include <stdint.h>
 
 using byte = uint8_t;
+using word = uint32_t;
+
+const word MAX_VAL = 262143; // largest 18-bit number
 
 class CPU
 {
  public:
-    void init();
-    void cycle();
-    void setMemory(short address, short data);
-    short getMemory(short address);
+    void  init();
+    void  cycle();
+    void  setMemory(word address, word data);
+    word getMemory(word address);
 
     void printCPU();
 
-    short ram[4096]; //12 bit
-    short ACC;
-
-    short  PC;
-    short  SP;
+    word ram[MAX_VAL];
+    word ACC;
+    word  PC;
+    word  SP;
     byte  FLG;
+
+    word REG[4]; //4 general purpose registers
 
  private:
     bool runCpu;

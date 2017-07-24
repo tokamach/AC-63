@@ -27,11 +27,11 @@ public:
     void setSwitch(int set, bool state);
     void setIndividualDataLight(int light, bool state);
     void setIndividualAddressLight(int light, bool state);
-    void setDataLightsFromWord(short set);
-    void setAddressLightsFromShort(short set);
+    void setDataLightsFromWord(word set);
+    void setAddressLightsFromWord(word set);
     
     //Get data functions
-    short getWordFromSwitches();
+    word getWordFromSwitches();
     
 private:
     //Arrays to handle drawing and input

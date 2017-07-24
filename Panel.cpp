@@ -369,9 +369,9 @@ void Panel::updateFromInput()
     }
 }
 
-short Panel::getWordFromSwitches()
+word Panel::getWordFromSwitches()
 {
-    short sum;
+    word sum;
     for(int i = 17; i >= 0 ;i--)
     {
 	sum += switchArray[i];
@@ -402,13 +402,13 @@ void Panel::setSwitch(int set, bool state)
     switchArray[set] = state;
 }
 
-void Panel::setDataLightsFromWord(short set)
+void Panel::setDataLightsFromWord(word set)
 {
     for(int i = 0; i < 18; i++)
 	dataLightArray[i] = (set >> i) & 1;
 }
 
-void Panel::setAddressLightsFromWord(short set)
+void Panel::setAddressLightsFromWord(word set)
 {
     for(int i = 0; i < 18; i++)
 	addressLightArray[i] = (set >> i) & 1;
