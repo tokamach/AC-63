@@ -8,7 +8,6 @@ class Panel
 public:
     
     CPU *cpu;
-    enum LightType { DATA, ADDRESS};
     
     //Misc functions
     void init(CPU *cpu_);
@@ -32,9 +31,7 @@ public:
     void setAddressLightsFromShort(short set);
     
     //Get data functions
-    short getAddressFromSwitches();
-    short getAddressFromLights();
-    short getDataFromSwitches();
+    short getWordFromSwitches();
     
 private:
     //Arrays to handle drawing and input

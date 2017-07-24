@@ -18,7 +18,7 @@ void Panel::update()
     {
 	cpu->cycle();
     }	
-    setAddressLightsFromShort(cpu->PC);
+    setAddressLightsFromWord(cpu->PC);
     setDataLightsFromWord(cpu->getMemory(cpu->PC));
 }
 
@@ -158,7 +158,6 @@ void Panel::drawPanel(int xoff, int yoff)
 
 void Panel::drawLightAt(int x, int y, bool state)
 {
-    //This function is ugly. It's awful. But it works.
     move(y, x);
     addch('/');
     move(y+1, x);
@@ -343,7 +342,7 @@ void Panel::updateFromInput()
 	//Control Keys
 	//Read switch: r
     case 'r':
-	cpu->PC = getAddressFromSwitches();
+	cpu->PC = getWordFromSwitches();
 	break;
 	
 	//Start switch: q
@@ -359,7 +358,7 @@ void Panel::updateFromInput()
 	
 	//Write: w
     case 'w':
-	cpu->setMemory(cpu->PC, getDataFromSwitches());
+	cpu->setMemory(cpu->PC, getWordFromSwitches());
 	break;
 	
 	//Reset: t
@@ -370,22 +369,10 @@ void Panel::updateFromInput()
     }
 }
 
-short Panel::getAddressFromSwitches()
+short Panel::getWordFromSwitches()
 {
     short sum;
-    for(int i = 11; i >= 0 ;i--)
-    {
-	sum += switchArray[i];
-	if(i != 0)
-	    sum <<= 1;
-    }
-    return sum;
-}
-
-short Panel::getDataFromSwitches()
-{
-    short sum = 0;
-    for(int i = 11; i >= 0; i--)
+    for(int i = 17; i >= 0 ;i--)
     {
 	sum += switchArray[i];
 	if(i != 0)
@@ -396,7 +383,7 @@ short Panel::getDataFromSwitches()
 
 void Panel::toggleSwitch(int set)
 {
-    if(set>17)
+    if(set > 17)
 	return;
     
     switchArray[set] = !switchArray[set];
@@ -409,7 +396,7 @@ void Panel::toggleStartSwitch()
 
 void Panel::setSwitch(int set, bool state)
 {
-    if(set > 12)
+    if(set > 17)
 	return;
     
     switchArray[set] = state;
@@ -417,12 +404,12 @@ void Panel::setSwitch(int set, bool state)
 
 void Panel::setDataLightsFromWord(short set)
 {
-    for(int i = 0; i < 12; i++)
+    for(int i = 0; i < 18; i++)
 	dataLightArray[i] = (set >> i) & 1;
 }
 
-void Panel::setAddressLightsFromShort(short set)
+void Panel::setAddressLightsFromWord(short set)
 {
-    for(int i = 0; i < 12; i++)
+    for(int i = 0; i < 18; i++)
 	addressLightArray[i] = (set >> i) & 1;
 }
