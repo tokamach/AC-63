@@ -95,7 +95,7 @@ void Panel::drawPanel(int xoff, int yoff)
 	    }
 
 	    // Decorations
-	    if(j <= 3 && j > 0 && i > 86 && i < 116)
+	    if(j <= 3 && j > 0 && i > 84 && i < 116)
 	    {
 		addch('+');
 	    }
@@ -119,8 +119,8 @@ void Panel::drawPanel(int xoff, int yoff)
     attroff(COLOR_PAIR(1));
     
     attron(COLOR_PAIR(3));
-    move(2 + yoff, 89 + xoff);
-    addstr("Astro Computing Inc. AC-6");
+    move(2 + yoff, 87 + xoff);
+    addstr("Astral Computing Inc. AC-63");
     attroff(COLOR_PAIR(3));
     move(2 + yoff, 5 + xoff);
     addstr("START");
