@@ -5,7 +5,8 @@
 const word OPCODE_MASK  = 0b111100000000000000;
 const word INDIR_MASK   = 0b000010000000000000;
 const word ZERO_MASK    = 0b000001000000000000;
-const word OPERAND_MASK = 0b000000111111111111;
+const word REG_MASK     = 0b000000110000000000;
+const word OPERAND_MASK = 0b000000001111111111;
 
 const word EIGHTEEN_BIT_MASK = 0b111111111111111111;
 const word PC_HIGH_BIT_MASK  = 0b111100000000000000;
@@ -79,6 +80,7 @@ void CPU::cycle()
     byte opCode       = (OPCODE_MASK  & curWord) >> 15;
     bool indirect_bit = (INDIR_MASK   & curWord) >> 14;
     bool zero_bit     = (ZERO_MASK    & curWord) >> 13;
+    byte reg_sel      = (REG_MASK     & curWord) >> 11;
     short arg         = (OPERAND_MASK & curWord);
 
     if(indirect_bit)
