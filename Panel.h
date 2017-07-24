@@ -18,9 +18,9 @@ public:
     //Drawing functions
     void drawDebugInfo();
     void drawPanel(int xoff, int yoff);
-    void drawToggleSwitchAt(int x, int y, bool state);
+    void drawSwitchAt(int x, int y, bool state);
     void drawFlickSwitchAt(int x, int y, int state);
-    void drawLightAt(int x, int y, int index, LightType type);
+    void drawLightAt(int x, int y, bool state);
     
     //Set data functions
     void toggleSwitch(int set);
@@ -38,9 +38,9 @@ public:
     
 private:
     //Arrays to handle drawing and input
-    bool switchArray[12];
-    bool addressLightArray[12]; 
-    bool dataLightArray[12];
+    bool switchArray[18];
+    bool addressLightArray[18]; 
+    bool dataLightArray[18];
     //Switch states
     bool startSwitch = false;
     int singleStepSwitch = 0;
