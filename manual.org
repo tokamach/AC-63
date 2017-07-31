@@ -1,13 +1,13 @@
 * AC-63 CPU
 The AC-63 is an 18-bit CPU designed
 ** Registers
-Register|Purpose        |Bits|Description
---------|---------------|----|----------
-ACC     |Accumumlator   |18  |Stores results of operations.
-PC      |Program Counter|18  |Current location in memory of CPU.
-SP      |Stack Pointer  |18  |Allows function calls by storing address of the top of the stack
-GP1-3   |General Purpose|18  |Three general purpose registers
-FLG     |Flags          |6   |Stores flags, for results of operations.
+| Register | Purpose         | Bits | Description                                                      |
+|----------+-----------------+------+------------------------------------------------------------------|
+| ACC      | Accumumlator    |   18 | Stores results of operations.                                    |
+| PC       | Program Counter |   18 | Current location in memory of CPU.                               |
+| SP       | Stack Pointer   |   18 | Allows function calls by storing address of the top of the stack |
+| GP1-3    | General Purpose |   18 | Three general purpose registers                                  |
+| FLG      | Flags           |    6 | Stores flags, for results of operations.                         |
 
 ** Word Layout
 
