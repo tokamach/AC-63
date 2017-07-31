@@ -1,59 +1,99 @@
-# AC-63 CPU spec
-The AC-63 is an 18-bit CPU designed w
-## Registers
+* AC-63 CPU
+The AC-63 is an 18-bit CPU designed
+** Registers
 Register|Purpose        |Bits|Description
 --------|---------------|----|----------
 ACC     |Accumumlator   |18  |Stores results of operations.
 PC      |Program Counter|18  |Current location in memory of CPU.
 SP      |Stack Pointer  |18  |Allows function calls by storing address of the top of the stack
-GP      |General Purpose|18  |Four general purpose registers
+GP1-3   |General Purpose|18  |Three general purpose registers
 FLG     |Flags          |6   |Stores flags, for results of operations.
 
-## Word Layout
+** Word Layout
 
-```
 OOOOIZRRXXXXXXXXXX
-```
 
-**O**  
+*** O
 The 1st 4 bits of the word are the 4-bit opcode.
 
-**I**  
-The 4th bit is the *Addressing Mode* bit. It specifies which addressing mode is
+*** I
+The 5th bit is the *Addressing Mode* bit. It specifies which addressing mode is
 used for this operation.
 
 0. Direct: Use the 10-bits directly
 1. Indirect: Use the 10-bits to construct a 18-bit address, which contains the operand
 
-**Z**  
-The 5th bit is the *Zero* bit. It specifies how the additional 8 bits needed
+*** Z
+The 6th bit is the *Zero* or *Page* bit. It specifies how the additional 8 bits needed
 to make an 18 bit word are treated. This is essentially the paging bit.
 
 0. Filled with zeros.
 1. Uses the 8 high order bits of the PC.
 
-**X**  
+*** R
+The 7th and 8th bits are the *Register Select* bits. When zeroed no
+register is used, but when set to 1-3 they will alter the current
+operation to include a register.
+
+*** X
 The remaining 10 bits are the operand. As per the previous flags these will
 be used either directly, or to redirect
 
-## Operation Codes
-There are 16 basic instructions.
+** Operation Codes
+There are 16 base instructions.
 
-Operation|Dec|Bin|Description
----------|---|---|------------
-AND A    |000|000|Bitwise And A with ACC
-ADD A    |001|001|Add A to ACC
-DPA A    |002|010|Deposit ACC into A and clear ACC
-    A    |003|011|
-JMP A    |004|100|Jump to A
-JSR A    |005|101|Jump to A+1, store return address in A
-PLC      |006|110|Placeholder for now
-MIC      |007|111|Use microcode for instruction
+- A means operand section of word, commonly an address
+- R means register select bits
 
+Indirect addressing works as per above, and registers cannot be used
+for indirect addressing. If the value of the reg sel bits is 0, then
+they will not be used, however most operations are "Multi Function",
+in that they will perform an additional step involving registers if
+the reg sel bits are set.
 
-# Panel Interface
-
+| Operation | Description                      | Reg step                  |
+|-----------+----------------------------------+---------------------------|
+| AND A     | Bitwise And A with ACC           | nothing                   |
+| ADD R A   | Add A to ACC                     | add R                     |
+| DAM R A   | Deposit ACC into A and clear ACC |                           |
+| LDR R A   | Load A into R                    | n/a                       |
+| DPR R A   | Deposit R into A                 | n/a                       |
+| JMP R A   | Jump to A                        | Store return address in R |
+|           |                                  |                           |
+|           |                                  |                           |
+|           |                                  |                           |
+|           |                                  |                           |
+|           |                                  |                           |
+|           |                                  |                           |
+|           |                                  |                           |
+|           |                                  |                           |
+		 
 ```
+ |Oct|Bin
+ |---|----
+ | 00|0000
+ | 01|0001
+ | 02|0010
+ | 03|0011
+ | 04|0100
+ | 05|0101
+ | 06|0110
+ | 07|0111
+ | 10|1000
+ | 11|1001
+ | 12|1010
+ | 13|1011
+ | 14|1100
+ | 15|1101
+ | 16|1110
+ | 17|1111
+```
+
+
+* Panel Interface
+
+#+BEGIN_EXAMPLE
+
          ________________________________________________________________________________________________________________________
         /  ____________________________________________________________________________________________________________________  \
         | /                                                                                     +++++++++++++++++++++++++++++++\ |
@@ -86,8 +126,7 @@ MIC      |007|111|Use microcode for instruction
         | \____________________________________________________________________________________________________________________/ |
         \________________________________________________________________________________________________________________________/
 
-
-```
+#+END_EXAMPLE
 
 1. Address Lights
 2. Data Lights
