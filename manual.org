@@ -5,9 +5,9 @@ The AC-63 is an 18-bit CPU designed
 |----------+-----------------+------+------------------------------------------------------------------|
 | ACC      | Accumumlator    |   18 | Stores results of operations.                                    |
 | PC       | Program Counter |   18 | Current location in memory of CPU.                               |
-| SP       | Stack Pointer   |   18 | Allows function calls by storing address of the top of the stack |
+# | SP       | Stack Pointer   |   18 | Allows function calls by storing address of the top of the stack |
 | GP1-3    | General Purpose |   18 | Three general purpose registers                                  |
-| FLG      | Flags           |    6 | Stores flags, for results of operations.                         |
+# | FLG      | Flags           |    6 | Stores flags, for results of operations.                         |
 
 ** Word Layout
 
@@ -42,33 +42,35 @@ be used either directly, or to redirect
 ** Operation Codes
 There are 16 base instructions.
 
-- A means operand section of word, commonly an address
-- R means register select bits
-
 Indirect addressing works as per above, and registers cannot be used
 for indirect addressing. If the value of the reg sel bits is 0, then
 they will not be used, however most operations are "Multi Function",
 in that they will perform an additional step involving registers if
 the reg sel bits are set.
 
+- A means operand section of word, commonly an address
+- R means register specified by select bits
+
+
 | Operation | Description                      | Reg step                  |
 |-----------+----------------------------------+---------------------------|
-| AND A     | Bitwise And A with ACC           | nothing                   |
-| ADD R A   | Add A to ACC                     | add R                     |
-| DAM R A   | Deposit ACC into A and clear ACC |                           |
+| AND A     | Bitwise And A with ACC           |                           |
+| ADD R A   | Add A to ACC                     | add R additionally        |
+| DAM R A   | Deposit ACC into A and clear ACC | load R into ACC           |
 | LDR R A   | Load A into R                    | n/a                       |
 | DPR R A   | Deposit R into A                 | n/a                       |
+|-----------+----------------------------------+---------------------------|
 | JMP R A   | Jump to A                        | Store return address in R |
+| JEZ R A   | Jump to A if ACC  = 0            | Store return address in R |
+| JNZ R A   | Jump to A if ACC != 0            | Store return address in R |
 |           |                                  |                           |
 |           |                                  |                           |
 |           |                                  |                           |
 |           |                                  |                           |
 |           |                                  |                           |
 |           |                                  |                           |
-|           |                                  |                           |
-|           |                                  |                           |
-		 
-```
+
+#+BEGIN_COMMENT		 
  |Oct|Bin
  |---|----
  | 00|0000
@@ -87,8 +89,7 @@ the reg sel bits are set.
  | 15|1101
  | 16|1110
  | 17|1111
-```
-
+#+END_COMMENT
 
 * Panel Interface
 
