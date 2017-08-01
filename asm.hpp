@@ -29,20 +29,21 @@ word assemble(Operation op_arg)
 {
     word result = 0;
     map<string, byte> opmap = {
-	{"DAM",  0},
-	{"LDR",  1},
-	{"DPR",  2},
-	{"JMP",  3},
-	{"JEZ",  4},
-	{"JNZ",  5},
-	{"SHL",  6},
-	{"SHR",  7},
-	{"AND",  8},
-	{"OR" ,  9},
-	{"ADD", 10},
-	{"SUB", 11},
-	{"POP", 12},
-	{"PSH", 13}};
+	{"NOP",  0},
+	{"DAM",  1},
+	{"LDR",  2},
+	{"DPR",  3},
+	{"JMP",  4},
+	{"JEZ",  5},
+	{"JNZ",  6},
+	{"SHL",  7},
+	{"SHR",  8},
+	{"AND",  9},
+	{"OR" , 10},
+	{"ADD", 11},
+	{"SUB", 12},
+	{"POP", 13},
+	{"PSH", 14}};
     
     map<string, byte> indirect_page_map = {
 	{""  , 0},
