@@ -22,16 +22,16 @@ int main()
     assert(assemble(mkop("ADD", "IZ", 0, 30)) == 0b101011000000011110);
 
     vector<Operation> va = {
-	mkop("ADD", "", 0, 50),
-	mkop("ADD", "IZ", 0, 30),
 	mkop("ADD", "", 0, 50)
     };
     auto vr = assemble(va);
 
-    for (auto v : vr)
-    {
-	std::cout << std::bitset<18>(v) << std::endl;
-    }
+    loadProgIntoMem(vr, &cpu);
+    cpu.cycle();
+
+    cpu.printCPU();
+    cpu.dumpMem(0, 10);
+
 
     //DAM
     

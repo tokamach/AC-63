@@ -68,3 +68,13 @@ vector<word> assemble(vector<Operation> op_arg)
 
     return ret;
 }
+
+void loadProgIntoMem(vector<word> prog, CPU *cpu)
+{
+    int iter = 0;
+    for(auto w : prog)
+    {
+	cpu->setMemory(iter, w);
+	iter++;
+    }
+}
