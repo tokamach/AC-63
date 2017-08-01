@@ -15,7 +15,7 @@ using std::pair;
 //
 
 //fucking love modern C++
-word makeInstruction(string op, bool indirect, bool zero, byte reg, word arg)
+word makeInstruction(string op, string iz, byte reg, word arg)
 {
     word result = 0;
     map<string, byte> opmap = {
@@ -34,17 +34,14 @@ word makeInstruction(string op, bool indirect, bool zero, byte reg, word arg)
 	{"POP", 12},
 	{"PSH", 13}};
 
-    map<pair<bool, bool>, byte> indirect_page_map = {
-	{{false, false}, 0},
-	{{false,  true}, 1},
-	{{true , false}, 2},
-	{{true ,  true}, 3}};
-
-    pair<bool, bool> indir_bits = std::make_pair(indirect, zero);
-
+    map<string, byte> indirect_page_map = {
+	{""  , 0},
+	{"Z" , 1},
+	{"I" , 2},
+	{"IZ", 3}};
 
     result |= (opmap[op] << 14);
-    result |= (indirect_page_map[indir_bits] << 12);
+    result |= (indirect_page_map[iz] << 12);
     result |= (reg << 10);
     result |= arg;
 
@@ -57,10 +54,11 @@ int main()
     cpu.init();
 
     //test make instruction
-    assert(makeInstruction("ADD", false, false, 0, 50) == 0b101000000000110010);
-    assert(makeInstruction("ADD", false, false, 0, 30) == 0b101000000000011110);
+    assert(makeInstruction("ADD", "", 0, 50) == 0b101000000000110010);
+    assert(makeInstruction("ADD", "IZ", 0, 30) == 0b101011000000011110);
 
     //DAM
+    
     
     
     std::cout << "Tests finished succesfully!\n";
