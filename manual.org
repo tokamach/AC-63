@@ -56,24 +56,25 @@ with an operand of 0, as if to operate only on the register
 
 | Operation | Dec |  Bin | Description                        | Reg step                  |
 |-----------+-----+------+------------------------------------+---------------------------|
-| DAM R A   |   0 | 0000 | Deposit ACC into A and clear ACC   |                           |
-| LDR R A   |   1 | 0001 | Load A into R                      | n/a                       |
-| DPR R A   |   2 | 0010 | Deposit R into A                   | n/a                       |
+| NOP       |   0 | 0000 | No Operation                       |                           |
+| DAM R A   |   1 | 0001 | Deposit ACC into A and clear ACC   |                           |
+| LDR R A   |   2 | 0010 | Load A into R                      | n/a                       |
+| DPR R A   |   3 | 0011 | Deposit R into A                   | n/a                       |
 |-----------+-----+------+------------------------------------+---------------------------|
-| JMP R A   |   3 | 0011 | Jump to A                          | Store return address in R |
-| JEZ R A   |   4 | 0100 | Jump to A if ACC  = 0              | Store return address in R |
-| JNZ R A   |   5 | 0101 | Jump to A if ACC != 0              | Store return address in R |
+| JMP R A   |   4 | 0100 | Jump to A                          | Store return address in R |
+| JEZ R A   |   5 | 0101 | Jump to A if ACC  = 0              | Store return address in R |
+| JNZ R A   |   6 | 0110 | Jump to A if ACC != 0              | Store return address in R |
 |-----------+-----+------+------------------------------------+---------------------------|
-| SHL A     |   6 | 0110 | binary shift A left, store in ACC  |                           |
-| SHR A     |   7 | 0111 | binary shift A right, store in ACC |                           |
-| AND A     |   8 | 1000 | binary and A with ACC              |                           |
-| OR  A     |   9 | 1001 | binary OR A with ACC               |                           |
+| SHL A     |   7 | 0111 | binary shift A left, store in ACC  |                           |
+| SHR A     |   8 | 1000 | binary shift A right, store in ACC |                           |
+| AND A     |   9 | 1001 | binary and A with ACC              |                           |
+| OR  A     |  10 | 1010 | binary OR A with ACC               |                           |
 |-----------+-----+------+------------------------------------+---------------------------|
-| ADD R A   |  10 | 1010 | Add A to ACC                       | also add R                |
-| SUB R A   |  11 | 1011 | Subtract A from ACC                | also subtract R           |
+| ADD R A   |  11 | 1011 | Add A to ACC                       | also add R                |
+| SUB R A   |  12 | 1100 | Subtract A from ACC                | also subtract R           |
 |-----------+-----+------+------------------------------------+---------------------------|
-| POP A     |  12 | 1100 | Copy mem at SP into A, then dec SP |                           |
-| PSH A     |  13 | 1101 | Copy A into mem at SP, then inc SP |                           |
+| POP A     |  13 | 1101 | Copy mem at SP into A, then dec SP |                           |
+| PSH A     |  14 | 1110 | Copy A into mem at SP, then inc SP |                           |
 
 ** Hand Assembly
 

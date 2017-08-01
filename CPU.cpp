@@ -106,30 +106,34 @@ void CPU::cycle()
 
     switch(opCode)
     {
-    case 0: //DAM R A
+    case 0: //NOP
+	PC++;
+	break;
+
+    case 1: //DAM R A
 	setMemory(arg, ACC);
 	ACC = 0;
 	PC++;
 	break;
 
-    case 1: //LDR R A
+    case 2: //LDR R A
 	reg[regsel-1] = arg;
 	PC++;
 	break;
 
-    case 2: //DPR R A
+    case 3: //DPR R A
 	setMemory(arg, reg[regsel-1]);
 	PC++;
 	break;
 
-    case 3: //JMP R A
+    case 4: //JMP R A
 	if(regsel != 0)
 	    reg[regsel] = PC;
 
 	PC = arg;
 	break;
 
-    case 4: //JEZ R A
+    case 5: //JEZ R A
 	if(ACC == 0)
 	{
 	    if(regsel != 0)
@@ -141,7 +145,7 @@ void CPU::cycle()
 	    PC++;
 	break;
 
-    case 5: //JNZ R A
+    case 6: //JNZ R A
 	if(ACC != 0)
 	{
 	    if(regsel != 0)
@@ -153,27 +157,27 @@ void CPU::cycle()
 	    PC++;
 	break;
 
-    case 6: //SHL A
+    case 7: //SHL A
 	ACC = arg << 1;
 	PC++;
 	break;
 
-    case 7: //SHR A
+    case 8: //SHR A
 	ACC = arg >> 1;
 	PC++;
 	break;
 
-    case 8: //AND A
+    case 9: //AND A
 	ACC &= arg;
 	PC++;
 	break;
 
-    case 9: //OR A
+    case 10: //OR A
 	ACC |= arg;
 	PC++;
 	break;
 
-    case 10: //ADD R A
+    case 11: //ADD R A
 	ACC += arg;
 
 	if(regsel != 0)
@@ -182,7 +186,7 @@ void CPU::cycle()
 	PC++;
 	break;
 
-    case 11: //SUB R A
+    case 12: //SUB R A
 	ACC -= arg;
 
 	if(regsel != 0)
@@ -191,13 +195,13 @@ void CPU::cycle()
 	PC++;
 	break;
 
-    case 12: //POP A
+    case 13: //POP A
 	setMemory(arg, getMemory(SP));
 	SP--;
 	PC++;
 	break;
 
-    case 13: //PSH A
+    case 14: //PSH A
 	setMemory(getMemory(SP), arg);
 	SP++;
 	PC++;
