@@ -19,12 +19,10 @@ void CPU::init()
     ACC = 0x00000;
     PC  = 0x00000;
     SP  = 0x3FFFF;
-    FLG = 0x00;
 
     REG[0] = 0x00000;
     REG[1] = 0x00000;
     REG[2] = 0x00000;
-    REG[3] = 0x00000;
 
     for(int i = 0; i < MAX_VAL; i++)
     {
@@ -99,44 +97,84 @@ void CPU::cycle()
 
     switch(opCode)
     {
-	//AND: bitwise and arg with ACC
-    case 0:
-	ACC &= arg;
-	PC += 1;
-	break;
-
-	//JMP: unconditional jump to arg
-    case 1:
-	PC = arg;
-	break;
-
-	//DPA: deposit ACC into arg and clear ACC
-    case 2:
+    case 0: //DAM R A
 	setMemory(arg, ACC);
 	ACC = 0;
-	PC += 1;
 	break;
 
-	//ADD: add ARG into ACC
-    case 3:
-	ACC += arg;
-	PC += 1;
+    case 1: //LDR R A
+	reg[regsel-1] = arg;
 	break;
 
-	//JMP: jump to arg
-/*  case 4:
+    case 2: //DPR R A
+	setMemory(arg, reg[regsel-1]);
+	break;
+
+    case 3: //JMP R A
+	if(regsel != 0)
+	    reg[regsel] = PC;
+
 	PC = arg;
-	break; */
+	break;
 
-    case 5:
-	//JEZ: jump to arg+1 if PC+1 == 0, store return in arg
-	if(getMemory(PC+1) == 0)
+    case 4: //JEZ R A
+	if(ACC == 0)
 	{
-	    setMemory(arg, PC);
-	    PC = arg + 1;
-	} else {
-	    PC += 2;
+	    if(regsel != 0)
+		reg[regsel] = PC;
+
+	    PC = arg;
 	}
+	break;
+
+    case 5: //JNZ R A
+	if(ACC != 0)
+	{
+	    if(regsel != 0)
+		reg[regsel] = PC;
+
+	    PC = arg;
+	}
+	break;
+
+    case 6: //SHL A
+	ACC = arg << 1;
+	break;
+
+    case 7: //SHR A
+	ACC = arg >> 1;
+	break;
+
+    case 8: //AND A
+	ACC &= arg;
+	break;
+
+    case 9: //OR A
+	ACC |= arg;
+	break;
+
+    case 10: //ADD R A
+	ACC += arg;
+
+	if(regsel != 0)
+	    ACC += reg[regsel];
+	break;
+
+    case 11: //SUB R A
+	ACC -= arg;
+
+	if(regsel != 0)
+	    ACC -= reg[regsel];
+	break;
+
+    case 12: //POP A
+	setMemory(arg, getMemory(SP));
+	SP--;
+	break;
+
+    case 13: //PSH A
+	setMemory(getMemory(SP), arg);
+	SP++;
 	break;
 	
 	//Don't know what to do here

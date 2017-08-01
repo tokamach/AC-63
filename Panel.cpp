@@ -29,16 +29,13 @@ void Panel::drawDebugInfo()
     move(1, 0); clrtoeol();
     move(2, 0); clrtoeol();
 
-//    mvaddstr(0, 0, std::to_string(cpu->X).c_str());
-//    mvaddstr(1, 0, std::to_string(cpu->Y).c_str());
-//    mvaddstr(2, 0, std::to_string(cpu->Z).c_str());
-//
-//    mvaddstr(0, 5, std::to_string(cpu->I).c_str());
-//    mvaddstr(0, 5, std::to_string(cpu->J).c_str());
-//    mvaddstr(0, 5, std::to_string(cpu->K).c_str());
+    mvaddstr(0, 0, std::to_string(cpu->reg[0]).c_str());
+    mvaddstr(1, 0, std::to_string(cpu->reg[1]).c_str());
+    mvaddstr(2, 0, std::to_string(cpu->reg[2]).c_str());
 
     mvaddstr(0, 10, std::to_string(cpu->PC).c_str());
     mvaddstr(1, 10, std::to_string(cpu->ACC).c_str());
+    mvaddstr(1, 10, std::to_string(cpu->SP).c_str());
 }
 
 void Panel::drawPanel(int xoff, int yoff)

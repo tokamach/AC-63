@@ -21,9 +21,8 @@ class CPU
     word ACC;
     word  PC;
     word  SP;
-    byte  FLG;
 
-    word REG[4]; //4 general purpose registers
+    word REG[3]; //3 general purpose registers
 
  private:
     bool runCpu;
