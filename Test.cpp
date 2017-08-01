@@ -1,67 +1,66 @@
 #include <assert.h>
+#include <map>
+#include <utility>
+#include <string>
 #include <iostream>
 
 #include "CPU.h"
+
+using std::string;
+using std::map;
+using std::pair;
+
+//
+// This file contains tests for all instructions
+//
+
+//fucking love modern C++
+word makeInstruction(string op, bool indirect, bool zero, byte reg, word arg)
+{
+    word result = 0;
+    map<string, byte> opmap = {
+	{"DAM",  0},
+	{"LDR",  1},
+	{"DPR",  2},
+	{"JMP",  3},
+	{"JEZ",  4},
+	{"JNZ",  5},
+	{"SHL",  6},
+	{"SHR",  7},
+	{"AND",  8},
+	{"OR" ,  9},
+	{"ADD", 10},
+	{"SUB", 11},
+	{"POP", 12},
+	{"PSH", 13}};
+
+    map<pair<bool, bool>, byte> indirect_page_map = {
+	{{false, false}, 0},
+	{{false,  true}, 1},
+	{{true , false}, 2},
+	{{true ,  true}, 3}};
+
+    pair<bool, bool> indir_bits = std::make_pair(indirect, zero);
+
+
+    result |= (opmap[op] << 14);
+    result |= (indirect_page_map[indir_bits] << 12);
+    result |= (reg << 10);
+    result |= arg;
+
+    return result;
+}
 
 int main()
 {
     CPU cpu;
     cpu.init();
 
-    //TODO: add makeInstruction utility function
+    //test make instruction
+    assert(makeInstruction("ADD", false, false, 0, 50) == 0b101000000000110010);
+    assert(makeInstruction("ADD", false, false, 0, 30) == 0b101000000000011110);
 
-    ///JMP
-    //JMP 2
-    cpu.setMemory(0, 0b001010000010);
-    cpu.setMemory(1, 0b111111111111);
-    //JMP 1
-    cpu.setMemory(2, 0b001010000001);
-
-    cpu.cycle();
-    assert(cpu.PC == 2);
-    cpu.cycle();
-    assert(cpu.PC == 1);
-
-    //reset CPU
-    cpu.init();
-    
-
-    ///ADD
-    cpu.setMemory(127, 10);
-    //ADD I X 127
-    cpu.setMemory(0, 0b011111111111);
-    cpu.cycle();
-
-    assert(cpu.ACC == 10);
-
-    cpu.init();
-
-
-    ///DPA
-    cpu.setMemory(127, 50);
-    //TAD I Z 127
-    cpu.setMemory(0, 0b011111111111);
-    //DPA 10
-    cpu.setMemory(1, 0b010000001010);
-
-    cpu.cycle();
-    cpu.cycle();
-    assert(cpu.getMemory(10) == 50);
-
-    cpu.init();
-
-
-    ///JEZ
-    //JMP 10
-    cpu.setMemory(0,  0b001000001010);
-    //JEZ 20
-    cpu.setMemory(10, 0b101000010100);
-
-    cpu.cycle();
-    cpu.cycle();
-
-    assert(cpu.getMemory(20) == 10);
-    assert(cpu.PC == 21);
+    //DAM
     
     
     std::cout << "Tests finished succesfully!\n";
