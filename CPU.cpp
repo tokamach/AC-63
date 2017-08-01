@@ -110,7 +110,9 @@ void CPU::cycle()
 	    //create new address from arg and 5 higher order bits of PC
 	    arg = getMemory(getMemory((PC_HIGH_BIT_MASK & PC) + arg));
 	}
-    } else {
+    }
+    else
+    {
 	arg = getMemory(arg);
     }
 
