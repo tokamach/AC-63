@@ -35,9 +35,9 @@ public:
     
 private:
     //Arrays to handle drawing and input
-    bool switchArray[18];
-    bool addressLightArray[18]; 
-    bool dataLightArray[18];
+    bool switchArray[18]       = { false };
+    bool addressLightArray[18] = { false }; 
+    bool dataLightArray[18]    = { false };
     //Switch states
     bool startSwitch = false;
     int singleStepSwitch = 0;

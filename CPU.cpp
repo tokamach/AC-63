@@ -20,9 +20,9 @@ void CPU::init()
     PC  = 0x00000;
     SP  = 0x3FFFF;
 
-    REG[0] = 0x00000;
-    REG[1] = 0x00000;
-    REG[2] = 0x00000;
+    reg[0] = 0x00000;
+    reg[1] = 0x00000;
+    reg[2] = 0x00000;
 
     for(int i = 0; i < MAX_VAL; i++)
     {
@@ -78,7 +78,7 @@ void CPU::cycle()
     byte opCode       = (OPCODE_MASK  & curWord) >> 15;
     bool indirect_bit = (INDIR_MASK   & curWord) >> 14;
     bool zero_bit     = (ZERO_MASK    & curWord) >> 13;
-    byte reg_sel      = (REG_MASK     & curWord) >> 11;
+    byte regsel      = (REG_MASK     & curWord) >> 11;
     short arg         = (OPERAND_MASK & curWord);
 
     if(indirect_bit)

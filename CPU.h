@@ -22,7 +22,7 @@ class CPU
     word  PC;
     word  SP;
 
-    word REG[3]; //3 general purpose registers
+    word reg[3]; //3 general purpose registers
 
  private:
     bool runCpu;

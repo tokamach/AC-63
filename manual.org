@@ -75,8 +75,13 @@ with an operand of 0, as if to operate only on the register
 | POP A     |  12 | 1100 | Copy mem at SP into A, then dec SP |                           |
 | PSH A     |  13 | 1101 | Copy A into mem at SP, then inc SP |                           |
 
-#+BEGIN_COMMENT		 
-#+END_COMMENT
+** Hand Assembly
+
+| Asm    |                Bin |
+|--------+--------------------|
+| ADD 50 | 101000000000110010 |
+| ADD 30 | 101000000000011110 |
+| DAM  3 | 000000000000000011 |
 
 * Panel Interface
 
