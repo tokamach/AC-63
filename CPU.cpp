@@ -70,7 +70,7 @@ void CPU::dumpMem(int start, int end)
 
 void CPU::printCPU()
 {
-    std::cout << "=CPU State=\n"
+    std::cout << "=== CPU State ===\n"
 	      << "PC: " << std::bitset<18>(PC) << "\n"
 	      << "ACC: " << std::bitset<18>(ACC) << "\n"
 	      << "curword: " << std::bitset<18>(getMemory(PC)) << "\n"
@@ -84,24 +84,34 @@ void CPU::cycle()
 {
     word curWord = getMemory(PC);
 
-    byte opCode       = (OPCODE_MASK  & curWord) >> 15;
-    bool indirect_bit = (INDIR_MASK   & curWord) >> 14;
-    bool zero_bit     = (ZERO_MASK    & curWord) >> 13;
-    byte regsel       = (REG_MASK     & curWord) >> 11;
+    byte opCode       = (OPCODE_MASK  & curWord) >> 14;
+    bool indirect_bit = (INDIR_MASK   & curWord) >> 13;
+    bool zero_bit     = (ZERO_MASK    & curWord) >> 12;
+    byte regsel       = (REG_MASK     & curWord) >> 10;
     short arg         = (OPERAND_MASK & curWord);
+
+/*  std::cout << "=== Internal State ===" << "\n"
+	      << "opCode: " << std::bitset<4>(opCode) << "\n"
+	      << "indir: "  << std::bitset<1>(indirect_bit) << "\n"
+	      << "zero: "   << std::bitset<1>(zero_bit) << "\n"
+	      << "reg: "    << std::bitset<4>(regsel) << "\n"
+	      << "arg: "    << std::bitset<10>(arg) << "\n"
+	      << std::endl; */
 
     if(indirect_bit)
     {
 	if(zero_bit)
 	{
 	    //create new address from arg and zeroes for the 12 extra bits
-	    arg = getMemory(arg);
+	    arg = getMemory(getMemory(arg));
 	}
 	else
 	{
 	    //create new address from arg and 5 higher order bits of PC
-	    arg = getMemory((PC_HIGH_BIT_MASK & PC) + arg);
+	    arg = getMemory(getMemory((PC_HIGH_BIT_MASK & PC) + arg));
 	}
+    } else {
+	arg = getMemory(arg);
     }
 
     switch(opCode)
