@@ -59,15 +59,24 @@ word CPU::getMemory(word address)
     }
 }
 
+void CPU::dumpMem(int start, int end)
+{
+    std::cout << "=== CPU Memory Dump ===" << std::endl;
+    for(int i = start; i < end; i++)
+    {
+	std::cout << std::bitset<18>(getMemory(i)) << "\n";
+    }
+}
+
 void CPU::printCPU()
 {
     std::cout << "=CPU State=\n"
-	      << "PC is: " << std::bitset<18>(PC) << "\n"
-	      << "ACC is: " << std::bitset<18>(ACC) << "\n"
-	      << "curword is: " << std::bitset<18>(getMemory(PC)) << "\n"
-	//  << "opCode is: " << std::bitset<3>(opCode) << "\n"
-	//  << "indirect bit is: " << indirect_bit << "\n"
-	//  << "zero bit is: " << zero_bit << "\n"
+	      << "PC: " << std::bitset<18>(PC) << "\n"
+	      << "ACC: " << std::bitset<18>(ACC) << "\n"
+	      << "curword: " << std::bitset<18>(getMemory(PC)) << "\n"
+	      << "GP0: " << std::bitset<18>(reg[0]) << "\n"
+	      << "GP1: " << std::bitset<18>(reg[1]) << "\n"
+	      << "GP2: " << std::bitset<18>(reg[2]) << "\n"
 	      << std::endl;
 }
 
@@ -78,7 +87,7 @@ void CPU::cycle()
     byte opCode       = (OPCODE_MASK  & curWord) >> 15;
     bool indirect_bit = (INDIR_MASK   & curWord) >> 14;
     bool zero_bit     = (ZERO_MASK    & curWord) >> 13;
-    byte regsel      = (REG_MASK     & curWord) >> 11;
+    byte regsel       = (REG_MASK     & curWord) >> 11;
     short arg         = (OPERAND_MASK & curWord);
 
     if(indirect_bit)
@@ -100,14 +109,17 @@ void CPU::cycle()
     case 0: //DAM R A
 	setMemory(arg, ACC);
 	ACC = 0;
+	PC++;
 	break;
 
     case 1: //LDR R A
 	reg[regsel-1] = arg;
+	PC++;
 	break;
 
     case 2: //DPR R A
 	setMemory(arg, reg[regsel-1]);
+	PC++;
 	break;
 
     case 3: //JMP R A
@@ -125,6 +137,8 @@ void CPU::cycle()
 
 	    PC = arg;
 	}
+	else
+	    PC++;
 	break;
 
     case 5: //JNZ R A
@@ -135,22 +149,28 @@ void CPU::cycle()
 
 	    PC = arg;
 	}
+	else
+	    PC++;
 	break;
 
     case 6: //SHL A
 	ACC = arg << 1;
+	PC++;
 	break;
 
     case 7: //SHR A
 	ACC = arg >> 1;
+	PC++;
 	break;
 
     case 8: //AND A
 	ACC &= arg;
+	PC++;
 	break;
 
     case 9: //OR A
 	ACC |= arg;
+	PC++;
 	break;
 
     case 10: //ADD R A
@@ -158,6 +178,8 @@ void CPU::cycle()
 
 	if(regsel != 0)
 	    ACC += reg[regsel];
+
+	PC++;
 	break;
 
     case 11: //SUB R A
@@ -165,16 +187,20 @@ void CPU::cycle()
 
 	if(regsel != 0)
 	    ACC -= reg[regsel];
+
+	PC++;
 	break;
 
     case 12: //POP A
 	setMemory(arg, getMemory(SP));
 	SP--;
+	PC++;
 	break;
 
     case 13: //PSH A
 	setMemory(getMemory(SP), arg);
 	SP++;
+	PC++;
 	break;
 	
 	//Don't know what to do here

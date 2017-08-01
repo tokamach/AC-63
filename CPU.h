@@ -16,6 +16,7 @@ class CPU
     word getMemory(word address);
 
     void printCPU();
+    void dumpMem(int start, int end);
 
     word ram[MAX_VAL];
     word ACC;
