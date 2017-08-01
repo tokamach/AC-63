@@ -1,6 +1,6 @@
 # AC-63
 
-This repo is for a custom CPU design called the AC-63, it's emulator, as well as the spec in [manual.md](manual.md). The CPU was originally 8-bit, then 12-bit, and finally changed to 18-bit to avoid copying the PDP-8 too much.
+This repo is for a custom CPU design called the AC-63, it's emulator, as well as the spec in [manual.org](manual.org). The CPU was originally 8-bit, then 12-bit, and finally changed to 18-bit to avoid copying the PDP-8 too much.
 
 CPU Goals include:
 
